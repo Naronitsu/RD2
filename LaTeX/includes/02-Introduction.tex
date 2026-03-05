@@ -1,0 +1,107 @@
+\section{Introduction}
+\label{sec:Int}
+
+This section presents the research design for the project \emph{Minimal, Resource-Bounded Runtime Verification for a Safety-Critical Automotive ECU}. It follows the structure of the Research Design II write-up, covering the theme and rationale, research positioning, background, hypothesis, and the overall aim and purpose of the study.
+
+\subsection{Title and Programme Details}
+
+\textbf{Module:} MCAST IICT -- Research Design II (2025/2026)
+
+\textbf{Student:} Damian Navarro
+
+\textbf{Programme:} BSc (Hons) Multimedia Software Development
+
+\textbf{Institute:} Institute of Information and Communication Technology (IICT), MCAST
+
+\subsection{Chosen Research}
+
+The working title of the research is:
+
+\begin{quote}
+Minimal, Resource-Bounded Runtime Verification for a Safety-Critical Automotive ECU.
+\end{quote}
+
+\subsection{Theme and Topic Rationale}
+
+\textbf{Theme:} Safety and cybersecurity assurance for cyber-physical and IoT-like automotive systems.
+
+\textbf{Specific topic:} Designing a minimal set of runtime monitors for a safety-critical ECU (for example, braking) that can operate on constrained hardware while still supporting emerging automotive cybersecurity and homologation requirements~\cite{ekert2021cybersecurity,plappert2023hta}.
+
+\textbf{Rationale:} Modern vehicles integrate many ECUs connected via real-time automotive buses and central gateways; they must pass extensive cybersecurity verification and validation under norms such as ISO~21434 and UNECE regulations, often using large network test suites for homologation~\cite{ekert2021cybersecurity}. At the same time, IoT/edge and automotive controllers are resource-constrained and cannot easily host heavyweight security and verification mechanisms~\cite{williams2022survey,kuang2021remote,clemens2018runtime}.
+
+Runtime verification (RV) has been proposed as a lightweight way to monitor behaviour at runtime, for example with rule-based or automata-based monitors that inspect message traces or parametric events in IoT systems and digital-twin security architectures; only a subset of traffic may need to be monitored, keeping overhead negligible even on limited devices~\cite{krichen2023survey,zhang2024context,dehoz2022iotdt,incki2018novel,mehran2024containers}. In parallel, hardware trust anchors and remote attestation are evaluated as mechanisms to protect keys, firmware, and integrity for automotive and IoT devices, including very constrained controllers~\cite{lorych2024hta,plappert2023hta,kuang2021remote,jaksic2018algebraic,aman2020hatt,clemens2018runtime}.
+
+This project therefore investigates how to specify and implement a minimal, local runtime monitor on an ECU, aligned with these constraints and technologies.
+
+\subsection{Positioning and Research Onion}
+
+\textbf{Philosophy:} Pragmatism and design-science. The aim is to construct a feasible monitor design that fits real automotive and IoT constraints rather than to develop purely theoretical results~\cite{williams2022survey,krichen2023survey,kuang2021remote}.
+
+\textbf{Approach (deductive):}
+
+\begin{itemize}
+  \item Start from surveyed formal verification and validation needs in IoT and CPS~\cite{williams2022survey,krichen2023survey}, automotive cybersecurity testing practice~\cite{ekert2021cybersecurity}, and RV techniques for CPS, IoT, and robotics~\cite{zhang2024context,dehoz2022iotdt,saadat2024rosmonitoring2,incki2018novel,mehran2024containers}.
+  \item Derive design principles for a minimal ECU-level monitor (local properties, bounded state, low overhead, high availability)~\cite{zhang2024context,dehoz2022iotdt,kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+\textbf{Strategy:} A single case-study of one safety-critical ECU (for example, braking or driver-assist), similar to focused automotive case studies used for RV frameworks~\cite{zhang2024context,saadat2024rosmonitoring2,jaksic2018algebraic}.
+
+\textbf{Methodological choices:}
+
+\begin{itemize}
+  \item Mono-method, largely qualitative and analytic.
+  \item Model key safety and security properties as small automata or rule sets, following automata-theoretic and algebraic RV approaches~\cite{zhang2024context,saadat2024rosmonitoring2,jaksic2018algebraic}.
+  \item Estimate resource and timing overhead, drawing on work on runtime state verification and measurement on resource-constrained platforms and high-availability security services~\cite{kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+\textbf{Time horizon:} Cross-sectional (single design and evaluation cycle).
+
+\textbf{Techniques and procedures:}
+
+\begin{itemize}
+  \item Extract relevant safety and cybersecurity requirements from automotive norms and testing approaches~\cite{ekert2021cybersecurity}.
+  \item Formalise 3--5 ECU-local properties as automata or rules, inspired by automata-based monitors for autonomous driving and algebraic RV~\cite{zhang2024context,saadat2024rosmonitoring2,jaksic2018algebraic}.
+  \item Propose how a monitor can be embedded in the ECU control loop with minimal probes and selective observation of events and messages, similar to selective traffic monitoring in IoT digital-twin security and event-calculus-based RV~\cite{krichen2023survey,dehoz2022iotdt,incki2018novel,mehran2024containers}.
+  \item Discuss how hardware trust anchors and remote or hybrid attestation could protect the monitor, its configuration, and integrity in automotive and IoT settings~\cite{lorych2024hta,plappert2023hta,kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+\subsection{Background to the Research Theme}
+
+New vehicle generations deploy many ECUs under a central gateway and must pass large cybersecurity V\&V test suites for homologation, affecting how in-vehicle communication is tested and which attack patterns are checked~\cite{ekert2021cybersecurity}. More broadly, IoT and CPS introduce critical safety and privacy risks while devices remain heavily constrained in CPU, memory, power, and area, limiting traditional security mechanisms~\cite{williams2022survey,kuang2021remote,clemens2018runtime}.
+
+RV is recognised as a pragmatic and scalable technique for assessing correctness and resilience of complex CPS, including automotive systems~\cite{saadat2024rosmonitoring2}, and has been instantiated for intelligent transport and autonomous driving through automata-based environment-aware monitors that detect unsafe events under different conditions~\cite{zhang2024context}. IoT-focused RV solutions specify message exchanges as events and use event calculus or rule-based monitoring within digital-twin architectures, enabling failure detection with low overhead by observing only selected traffic~\cite{krichen2023survey,dehoz2022iotdt,incki2018novel,mehran2024containers}.
+
+In parallel, hardware trust anchors and remote attestation are surveyed and evaluated as means to establish trust in constrained devices, including automotive controllers; such mechanisms protect security-sensitive data and enable integrity checks without prohibitive cost~\cite{lorych2024hta,plappert2023hta,kuang2021remote,aman2020hatt,clemens2018runtime}.
+
+This context motivates a focused design of a minimal runtime verification solution for a safety-critical ECU, aligned with:
+
+\begin{itemize}
+  \item automotive cybersecurity V\&V practice and regulations~\cite{ekert2021cybersecurity},
+  \item lightweight RV methods for CPS, IoT, and robotics~\cite{krichen2023survey,zhang2024context,dehoz2022iotdt,saadat2024rosmonitoring2,incki2018novel,jaksic2018algebraic,mehran2024containers}, and
+  \item hardware-anchored trust and attestation techniques suitable for constrained automotive and IoT platforms~\cite{lorych2024hta,plappert2023hta,kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+\subsection{Hypothesis}
+
+A carefully selected, minimal set of local safety and security properties for a safety-critical automotive ECU can be implemented as runtime monitors with bounded time and memory overhead such that:
+
+\begin{itemize}
+  \item they detect violations relevant to automotive cybersecurity and safety requirements~\cite{ekert2021cybersecurity,zhang2024context,dehoz2022iotdt,saadat2024rosmonitoring2,incki2018novel}, and
+  \item they remain compatible with resource and availability constraints of in-vehicle and IoT-class controllers~\cite{williams2022survey,krichen2023survey,dehoz2022iotdt,kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+Formally, the main hypothesis is: \textbf{H1: Minimal, local runtime monitors for a safety-critical ECU can provide meaningful safety and cybersecurity coverage without violating the ECU's real-time and resource constraints.}
+
+\subsection{Research Aim and Purpose}
+
+\textbf{Aim:} To design and analytically evaluate a minimal, resource-bounded runtime verification monitor for a safety-critical automotive ECU, informed by automotive cybersecurity V\&V practice, IoT-oriented RV techniques, and hardware-anchored trust and attestation mechanisms~\cite{ekert2021cybersecurity,zhang2024context,dehoz2022iotdt,aman2020hatt,clemens2018runtime}.
+
+\textbf{Purpose:}
+
+\begin{itemize}
+  \item To derive a method for selecting and formalising a small set of ECU-local properties as automata or rules appropriate for runtime monitoring under tight resource constraints~\cite{williams2022survey,zhang2024context,saadat2024rosmonitoring2,incki2018novel,jaksic2018algebraic,clemens2018runtime}.
+  \item To propose an integration strategy that minimises monitoring overhead using selective observation of events and variables, while still addressing cybersecurity and safety requirements~\cite{ekert2021cybersecurity,krichen2023survey,zhang2024context,dehoz2022iotdt,incki2018novel,mehran2024containers}.
+  \item To outline how hardware trust anchors and remote or hybrid attestation can protect the monitor, its configuration, and logs in automotive and IoT architectures~\cite{lorych2024hta,plappert2023hta,kuang2021remote,aman2020hatt,clemens2018runtime}.
+\end{itemize}
+
+This yields a focused design blueprint that can later be embedded in broader connected-vehicle and IoT security architectures.
