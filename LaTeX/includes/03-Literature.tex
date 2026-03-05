@@ -1,0 +1,116 @@
+\section{Literature Review}
+\label{sec:Lit}
+\par Give a \textbf{brief} overview of the theme, history and facts. You should use the present tense since what you are documenting is current knowledge. Do not dedicate a lot to historical facts about the subject matter, but limit to a paragraph. Make sure you quantify by quoting statistics where relevant. Following is an example for a research in \enquote{Automatic cyber-bullying detection}: \textit{With the popularity of social media, predominantly amongst the adolescent and young adult generations, there appears to be a correlation between the increase in suicide rates and social networking adoption~\cite{miron2019suicide}, with suicide attempts increasing by 10\% amongst adolescents and by 5.6\% amongst young adults for the period 2013-2017.} 
+
+\par Once you have documented some background on the theme you need to focus on three key aspects: \textbf{Data set}; \textbf{Algorithms}; \textbf{Evaluation}. So you need to research existing data sets and document them. Say we want to explore accent recognition in audio/video clips, you would need to identify existing data sets and document first by enumerating then by comparing in a table layout such as in Table~\ref{tab:Data}. A useful tool for creation of tables is Truben's Table Tool\footnote{\url{http://truben.no/table/}}. When enlisting the data sets make sure you provide the proper citation. When comparing you need to identify the key features/factors/variable that are important for your subject matter.
+
+\begin{enumerate}
+    \item The Accents of the British Isles (ABI-1) Speech Corpus, \cite{d2004accents}
+    \item TIMIT Acoustic-Phonetic Continuous Speech Corpus, \cite{garofalo1993darpa}
+    \item Common Voice Data Set, \cite{common_voice}
+    \item WSJCAM0 Corpus, \cite{robinson1995wsjcamo}
+    \item The Speech Accent Archive, \cite{weinberger2011speech}
+    \item The Arctic CMU Audio Database, \cite{kominek2004cmu}
+    \item VoxCeleb2, \cite{chung2018voxceleb2} 
+\end{enumerate}
+
+\begin{table}[ht]
+    \caption{Data-set comparison. Accent: Native (N); Non-Native (NN)}
+    \label{tab:Data}
+    \centering
+    \begin{tabular}{l|l|l|l|l|l}
+        \textbf{Data set} & \textbf{Speakers} & \textbf{Utterances} & \textbf{Accents}   & \textbf{Citations} & \textbf{Type} \\\hline
+        1               & 280               & 855                 & 14                & 28              & N               \\
+        2               & 630               & 6,300               & 8                 & 1,918           & N               \\
+        3               & 50,590            & 644,120             & 16                & N/A             & N \& NN            \\
+        4 & 140 & 4,400 & 4 & 346 & N \\
+        5               & 2,140             & 2,140               & \textgreater{100} & 132             & N \& NN        \\
+        6               & 18                & 1,150               & 4                 & 458             & N \& NN               \\
+        7               & 6,000              & 1,128,246          & 6                 & 168             & N \& NN  
+    \end{tabular}
+\end{table}
+
+\par Next you need to provide an overview of what researchers have proposed and their key results. A survey or review paper would be ideal since these kind of papers would cover multiple techniques and provide good comparisons. Returning to our example of \enquote{Automatic cyber-bullying detection} consider the technique comparison documented in Table~\ref{tab:Com}. Note the structure used in this table, first you have the citation of the research, followed by the data set used, then the metric quoted for comparison, finally the relevant result. 
+
+\begin{table}[ht]
+    \centering
+    \caption{State of the art results}
+    \label{tab:Com}
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{l|l|l|l}
+            \textbf{\textbf{Study}}         & \textbf{\textbf{Data set}}    & \textbf{\textbf{Metrics}} & \textbf{\textbf{Results}}                                                                   \\ \hline
+            \cite{prathyusha2017cyberbully} & Crime Investigation Forum    & F1 Score                  & \begin{tabular}[c]{@{}l@{}}CDMS: 40.75\%\\ CDCSGF: 39.75\%\end{tabular}                     \\ \hline
+            \cite{van2018automatic}         & Corpus for English and Dutch & F1 Score                  & \begin{tabular}[c]{@{}l@{}}English: 64\%\\ Dutch: 61\%\end{tabular}                         \\ \hline
+            \cite{al2016cybercrime}         & Twitter                      & F1 Score                  & 93.6\%                                                                                      \\ \hline
+            \cite{zhong2016content}         & Instagram                    & F1 Score                  & \begin{tabular}[c]{@{}l@{}}SVM Classifier: 95.00\%\\ Image Classifier: 68.08\%\end{tabular} \\ \hline
+            \cite{reynolds2011using}        & Formsrping                   & Accuracy                  & 78.5\%                                                                                      \\ \hline
+            \cite{dinakar2011modeling}      & Youtube                      & Accuracy                  & 66.70\%        \\   \hline        
+        \end{tabular}
+    }
+\end{table}
+
+\par The final recommended part in a good literature review is a review in the evaluation metrics used. It is not possible to cover all possible evaluation metrics but in most cases there is a classification problem, which would require something called a confusion matrix. Consider the problem of recognising and distinguishing an image of a cat from that of a dog. You will have a data set split into training and testing. Both will have the ground truth, what the image is actually showing. This ground truth, in the case of the training data set will be used for the creation of the Artificial Intelligence (AI) model, whilst the ground truth in the testing data set will be used to compare the predicted classification. The predictions are plotted in a confusion matrix as shown in Table~\ref{tab:CatDog}. The same table can be extended to have more than 2 categories such as introducing the mouse category. Then you need to cycle the focus for each category as shown in Table~\ref{tab:CatObjective} and Table~\ref{tab:DogObjective}, then extract the key values namely:
+\begin{enumerate}
+    \item \textbf{True Positives (TP)} - This refers to the correctly predicted positive values i.e. the value of both the actual class and predicted class is yes. 
+    \item \textbf{True Negatives (TN)} - These are the correctly predicted negative values i.e. the value of both actual class and predicted class is no.
+    \item \textbf{False Positives (FP)} - It indicates values where the actual class is no but the predicted class is yes.
+    \item \textbf{False Negatives (FN)} - It indicates values where the actual class is yes but the predicted class in no.
+\end{enumerate}
+
+\begin{table}
+    \caption{Sample Cat vs Dog Confusion Matrix}
+    \label{tab:CatDog}
+    \centering
+    \begin{tabular}{ll|ll}
+    ~      & ~   & \textbf{Predicted} & ~   \\
+    ~      & ~   & Cat       & Dog \\ \hline
+    \textbf{Actual} & Cat & 33        & 2   \\
+    ~      & Dog & 5         & 30  \\
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \caption{Cat category evaluation metrics}
+    \label{tab:CatObjective}
+    \centering
+    \begin{tabular}{ll|ll}
+    ~      & ~   & \textbf{Predicted} & ~   \\
+    ~      & ~   & Cat       & Not-Cat \\ \hline
+    \textbf{Actual} & Cat & TP        & FN   \\
+    ~      & Not-Cat & FP         & TN  \\
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \caption{Dog category evaluation metrics}
+    \label{tab:DogObjective}
+    \centering
+    \begin{tabular}{ll|ll}
+    ~      & ~   & \textbf{Predicted} & ~   \\
+    ~      & ~   & Not-Dog       & Dog \\ \hline
+    \textbf{Actual} & Not-Dog & TN        & FP   \\
+    ~      & Dog & FN         & TP  \\
+    \end{tabular}
+\end{table}
+
+\par The confusion matrices are used to provide evaluation metrics such as Accuracy, Precision, Recall and F1-Score. Depending on the subject matter being researched the proper metrics need to be quoted, thus the need to research this in academic literature. For a quick but reliable reference you can consider Wikipedia's dedicated page\footnote{\url{https://en.wikipedia.org/wiki/Confusion_matrix}}.
+
+\begin{enumerate}
+    \item \textbf{Accuracy (ACC)} - This shows the measure of effectiveness of the machine learning model.
+    \begin{equation} 
+     Accuracy (ACC)= \frac{TP + TN}{P + N}
+    \end{equation}
+    \item \textbf{Precision (PPV)} - Precision is the ratio of correctly predicted positive values to the total predicted positive values. This metric highlights the correct positive predictions out of all the positive predictions. High precision indicates low false positive rate.
+    \begin{equation} 
+     Precision (PPV)= \frac{TP}{TP + FP}
+    \end{equation}
+    \item \textbf{Recall (TPR)} - The recall is the ratio of correctly predicted positive values to the actual postive values. Recall highlights the sensitivity of the algorithm i.e. out of all the actual positives how many were caught by the program.
+    \begin{equation} 
+     Recall (TPR)= \frac{TP}{P}
+    \end{equation}
+    
+    \item \textbf{F1 Score} - F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account. Intuitively it is not as easy to understand as accuracy, but F1 is usually more useful than accuracy, especially if you have an uneven class distribution.
+    \begin{equation} 
+     F1 Score = \frac{2TP}{2TP + FP + FN}
+    \end{equation}
+\end{enumerate}

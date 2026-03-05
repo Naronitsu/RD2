@@ -1,0 +1,21 @@
+\section{Findings \& Discussion of Results}
+\label{sec:Fin}
+\par This section is a delicate section and you are encouraged to be as honest and open as possible. The aim is not to show that you got a perfect solution to a long existing problem. Trying to state that in a few months you developed a perfect solution with 100\% is not convincing and raises doubts. It is recommended that you document your findings in every step of your research pipeline, highlighting your observations and decisions taken. Present your results and very importantly compare with existing research which you documented in Section~\ref{sec:Lit}. 
+
+\par The focus of the Project module is for you to delve into an area that exposes you to new technologies and offers you an opportunity to be critical of your work. So you are expected to document where your solution/research worked and where it did not. Reflect and document reasons why the solution/research did not perform as expected and propose ways of addressing this. From these observations you will produce new research questions in the next section. Consider the research in \enquote{Brand usage detection within audio streams}, where certain key terms were searched within videos, the results of which are documented in Table~\ref{tab:Accents}. You will notice that the terms \enquote{Peppa} and \enquote{Sushi} were the least recognised terms even by the best transcribers. Upon investigation we determined that \enquote{Peppa} was not recognised cause of voice morphing to create childish voices in the cartoon video, whilst \enquote{Sushi} was pronounced by a Japanese person speaking English. So the research student decided to focus his dissertation research on how to create a system that is able to recognise heavy accents to automate the configuration of a transcriber, in this case to cater for English spoken by a Japanese person, which accent is very different from an Indian accent, British accent or Italian accent, just to name a few.
+
+\begin{table}[ht]
+    \centering
+    \caption{Recall results}
+    \label{tab:Accents}
+    \begin{tabular}{l|l|l|l|l}
+    \textbf{\#} & \textbf{Term}   & \textbf{Google} \textbf{Cloud} &\textbf{} \textbf{Google} \textbf{Speech} & \textbf{Sphinx} \textbf{CMU} \\ \hline
+    1        & Peppa  & 27\%             & 33\%              & 0\%        \\
+    2        & Peppa  & 33\%             & 22\%              & 0\%        \\
+    3        & Apple  & 96\%             & 92\%              & 79\%       \\
+    4        & Galaxy & 100\%            & 100\%             & 100\%      \\
+    5        & Galaxy & 95\%             & 95\%              & 80\%       \\
+    6        & Sushi  & 75\%             & 35\%              & 0\%        \\ \hline
+    ~       & Average & 71\%    & 62\%  &   43\%    \\
+    \end{tabular}
+\end{table}
