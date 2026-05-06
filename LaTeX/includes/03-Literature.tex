@@ -1,116 +1,30 @@
 \section{Literature Review}
 \label{sec:Lit}
-\par Give a \textbf{brief} overview of the theme, history and facts. You should use the present tense since what you are documenting is current knowledge. Do not dedicate a lot to historical facts about the subject matter, but limit to a paragraph. Make sure you quantify by quoting statistics where relevant. Following is an example for a research in \enquote{Automatic cyber-bullying detection}: \textit{With the popularity of social media, predominantly amongst the adolescent and young adult generations, there appears to be a correlation between the increase in suicide rates and social networking adoption~\cite{miron2019suicide}, with suicide attempts increasing by 10\% amongst adolescents and by 5.6\% amongst young adults for the period 2013-2017.} 
 
-\par Once you have documented some background on the theme you need to focus on three key aspects: \textbf{Data set}; \textbf{Algorithms}; \textbf{Evaluation}. So you need to research existing data sets and document them. Say we want to explore accent recognition in audio/video clips, you would need to identify existing data sets and document first by enumerating then by comparing in a table layout such as in Table~\ref{tab:Data}. A useful tool for creation of tables is Truben's Table Tool\footnote{\url{http://truben.no/table/}}. When enlisting the data sets make sure you provide the proper citation. When comparing you need to identify the key features/factors/variable that are important for your subject matter.
+Figure~\ref{fig:litmap} summarises how the sources in the research bibliography relate to conceptual themes. Branches group survey, runtime verification, automotive and trust, and methods/tooling; each citation is paired with a short summary (no duplicated sources).
 
-\begin{enumerate}
-    \item The Accents of the British Isles (ABI-1) Speech Corpus, \cite{d2004accents}
-    \item TIMIT Acoustic-Phonetic Continuous Speech Corpus, \cite{garofalo1993darpa}
-    \item Common Voice Data Set, \cite{common_voice}
-    \item WSJCAM0 Corpus, \cite{robinson1995wsjcamo}
-    \item The Speech Accent Archive, \cite{weinberger2011speech}
-    \item The Arctic CMU Audio Database, \cite{kominek2004cmu}
-    \item VoxCeleb2, \cite{chung2018voxceleb2} 
-\end{enumerate}
+\input{includes/literature-map}
 
-\begin{table}[ht]
-    \caption{Data-set comparison. Accent: Native (N); Non-Native (NN)}
-    \label{tab:Data}
-    \centering
-    \begin{tabular}{l|l|l|l|l|l}
-        \textbf{Data set} & \textbf{Speakers} & \textbf{Utterances} & \textbf{Accents}   & \textbf{Citations} & \textbf{Type} \\\hline
-        1               & 280               & 855                 & 14                & 28              & N               \\
-        2               & 630               & 6,300               & 8                 & 1,918           & N               \\
-        3               & 50,590            & 644,120             & 16                & N/A             & N \& NN            \\
-        4 & 140 & 4,400 & 4 & 346 & N \\
-        5               & 2,140             & 2,140               & \textgreater{100} & 132             & N \& NN        \\
-        6               & 18                & 1,150               & 4                 & 458             & N \& NN               \\
-        7               & 6,000              & 1,128,246          & 6                 & 168             & N \& NN  
-    \end{tabular}
-\end{table}
+This section reviews how recent studies approach verification, monitoring, and trust for connected, resource-constrained controllers such as automotive ECUs and IoT devices. The discussion is grounded in the sources charted in Fig.~\ref{fig:litmap}~\cite{williams2022survey,krichen2023survey,kuang2021remote,zhang2024context,dehoz2022iotdt,jaksic2018algebraic,saadat2024rosmonitoring2,clemens2018runtime,incki2018novel,mehran2024containers,goodloe2023highassurance,ekert2021cybersecurity,lorych2024hta,plappert2023hta,aman2020hatt,colombo2009larva,abela2023rvtee,saunders2016research}.
 
-\par Next you need to provide an overview of what researchers have proposed and their key results. A survey or review paper would be ideal since these kind of papers would cover multiple techniques and provide good comparisons. Returning to our example of \enquote{Automatic cyber-bullying detection} consider the technique comparison documented in Table~\ref{tab:Com}. Note the structure used in this table, first you have the citation of the research, followed by the data set used, then the metric quoted for comparison, finally the relevant result. 
+\subsection{Methodological themes in related work}
 
-\begin{table}[ht]
-    \centering
-    \caption{State of the art results}
-    \label{tab:Com}
-    \resizebox{\columnwidth}{!}{
-        \begin{tabular}{l|l|l|l}
-            \textbf{\textbf{Study}}         & \textbf{\textbf{Data set}}    & \textbf{\textbf{Metrics}} & \textbf{\textbf{Results}}                                                                   \\ \hline
-            \cite{prathyusha2017cyberbully} & Crime Investigation Forum    & F1 Score                  & \begin{tabular}[c]{@{}l@{}}CDMS: 40.75\%\\ CDCSGF: 39.75\%\end{tabular}                     \\ \hline
-            \cite{van2018automatic}         & Corpus for English and Dutch & F1 Score                  & \begin{tabular}[c]{@{}l@{}}English: 64\%\\ Dutch: 61\%\end{tabular}                         \\ \hline
-            \cite{al2016cybercrime}         & Twitter                      & F1 Score                  & 93.6\%                                                                                      \\ \hline
-            \cite{zhong2016content}         & Instagram                    & F1 Score                  & \begin{tabular}[c]{@{}l@{}}SVM Classifier: 95.00\%\\ Image Classifier: 68.08\%\end{tabular} \\ \hline
-            \cite{reynolds2011using}        & Formsrping                   & Accuracy                  & 78.5\%                                                                                      \\ \hline
-            \cite{dinakar2011modeling}      & Youtube                      & Accuracy                  & 66.70\%        \\   \hline        
-        \end{tabular}
-    }
-\end{table}
+Several methodological strands recur across these studies. \textbf{Survey and taxonomy approaches} synthesise large bodies of technique: Krichen~\cite{krichen2023survey} maps formal verification and validation (FV\&V) methods for IoT, highlighting where exhaustive analysis gives way to lighter runtime checks, while Williams \textit{et al.}~\cite{williams2022survey} catalogue IoT security challenges under emerging connectivity paradigms. \textbf{Empirical and industry-oriented testing} is represented by Ekert \textit{et al.}~\cite{ekert2021cybersecurity}, who relate automotive cybersecurity V\&V to structured test campaigns and normative expectations. \textbf{Runtime monitoring with formal undertones} appears in Zhang \textit{et al.}~\cite{zhang2024context}, who use automata-theoretic environment models for context-aware safety monitoring in intelligent transport settings, and in de Hoz Diego \textit{et al.}~\cite{dehoz2022iotdt}, who combine an IoT digital twin with rule-based runtime verification over parametric network events, showing that observing only a subset of traffic can still expose protocol violations with low overhead. \textbf{Tool-chain and integration studies} include ROSMonitoring~2.0~\cite{saadat2024rosmonitoring2}, which extends runtime verification in ROS to services and ordered topics, and work on hardware trust anchors (HTA), where Lorych and Plappert~\cite{lorych2024hta} treat authentication for updatable IoT devices and Plappert \textit{et al.}~\cite{plappert2023hta} evaluate HTA designs against automotive requirements. Finally, Jak\v{s}i\'c \textit{et al.}~\cite{jaksic2018algebraic} advance an algebraic view of runtime verification, supporting incremental and quantitative monitoring---a useful reference when specifications are refined iteratively.
 
-\par The final recommended part in a good literature review is a review in the evaluation metrics used. It is not possible to cover all possible evaluation metrics but in most cases there is a classification problem, which would require something called a confusion matrix. Consider the problem of recognising and distinguishing an image of a cat from that of a dog. You will have a data set split into training and testing. Both will have the ground truth, what the image is actually showing. This ground truth, in the case of the training data set will be used for the creation of the Artificial Intelligence (AI) model, whilst the ground truth in the testing data set will be used to compare the predicted classification. The predictions are plotted in a confusion matrix as shown in Table~\ref{tab:CatDog}. The same table can be extended to have more than 2 categories such as introducing the mouse category. Then you need to cycle the focus for each category as shown in Table~\ref{tab:CatObjective} and Table~\ref{tab:DogObjective}, then extract the key values namely:
-\begin{enumerate}
-    \item \textbf{True Positives (TP)} - This refers to the correctly predicted positive values i.e. the value of both the actual class and predicted class is yes. 
-    \item \textbf{True Negatives (TN)} - These are the correctly predicted negative values i.e. the value of both actual class and predicted class is no.
-    \item \textbf{False Positives (FP)} - It indicates values where the actual class is no but the predicted class is yes.
-    \item \textbf{False Negatives (FN)} - It indicates values where the actual class is yes but the predicted class in no.
-\end{enumerate}
+\subsection{Academic and non-academic material}
 
-\begin{table}
-    \caption{Sample Cat vs Dog Confusion Matrix}
-    \label{tab:CatDog}
-    \centering
-    \begin{tabular}{ll|ll}
-    ~      & ~   & \textbf{Predicted} & ~   \\
-    ~      & ~   & Cat       & Dog \\ \hline
-    \textbf{Actual} & Cat & 33        & 2   \\
-    ~      & Dog & 5         & 30  \\
-    \end{tabular}
-\end{table}
+\textbf{Academic} sources here include peer-reviewed journals (e.g.~\cite{ekert2021cybersecurity,williams2022survey,plappert2023hta,zhang2024context,krichen2023survey}), archival conference proceedings (e.g.~\cite{lorych2024hta}), and edited volume chapters (e.g.~\cite{dehoz2022iotdt}). Workshop and electronic proceedings such as EPTCS~\cite{saadat2024rosmonitoring2} are scholarly but differ from flagship journals in review depth and indexing. \textbf{Non-academic or grey} material relevant to automotive work often comprises standards (e.g.\ ISO/SAE norms referenced in testing practice~\cite{ekert2021cybersecurity}), vendor security guides, and certification artefacts; these are essential for deployment context but are not substitutes for peer-reviewed evidence. The algebraic framework of Jak\v{s}i\'c \textit{et al.}~\cite{jaksic2018algebraic} is disseminated via arXiv: it is valuable for technical content but should be read as a preprint unless a later archival version is cited. Distinguishing these layers avoids overstating the evidential weight of grey literature while still acknowledging regulatory drivers.
 
-\begin{table}
-    \caption{Cat category evaluation metrics}
-    \label{tab:CatObjective}
-    \centering
-    \begin{tabular}{ll|ll}
-    ~      & ~   & \textbf{Predicted} & ~   \\
-    ~      & ~   & Cat       & Not-Cat \\ \hline
-    \textbf{Actual} & Cat & TP        & FN   \\
-    ~      & Not-Cat & FP         & TN  \\
-    \end{tabular}
-\end{table}
+\subsection{Five recommended peer-reviewed journal articles}
 
-\begin{table}
-    \caption{Dog category evaluation metrics}
-    \label{tab:DogObjective}
-    \centering
-    \begin{tabular}{ll|ll}
-    ~      & ~   & \textbf{Predicted} & ~   \\
-    ~      & ~   & Not-Dog       & Dog \\ \hline
-    \textbf{Actual} & Not-Dog & TN        & FP   \\
-    ~      & Dog & FN         & TP  \\
-    \end{tabular}
-\end{table}
+For readers prioritising archival journal literature, the following five articles offer strong overlap with automotive cybersecurity, IoT assurance, and runtime-oriented analysis: (1)~Ekert \textit{et al.}~\cite{ekert2021cybersecurity} on automotive cybersecurity V\&V testing; (2)~Krichen~\cite{krichen2023survey} on FV\&V for IoT; (3)~Williams \textit{et al.}~\cite{williams2022survey} on IoT security and emerging technologies; (4)~Plappert \textit{et al.}~\cite{plappert2023hta} on hardware trust anchors in automotive settings; (5)~Zhang \textit{et al.}~\cite{zhang2024context} on automata-theoretic, context-aware monitoring for autonomous vehicle safety. Together they span testing practice, formal-method surveys, security landscape, trust hardware, and concrete monitoring formalisms.
 
-\par The confusion matrices are used to provide evaluation metrics such as Accuracy, Precision, Recall and F1-Score. Depending on the subject matter being researched the proper metrics need to be quoted, thus the need to research this in academic literature. For a quick but reliable reference you can consider Wikipedia's dedicated page\footnote{\url{https://en.wikipedia.org/wiki/Confusion_matrix}}.
+\subsection{Contextualisation for this study}
 
-\begin{enumerate}
-    \item \textbf{Accuracy (ACC)} - This shows the measure of effectiveness of the machine learning model.
-    \begin{equation} 
-     Accuracy (ACC)= \frac{TP + TN}{P + N}
-    \end{equation}
-    \item \textbf{Precision (PPV)} - Precision is the ratio of correctly predicted positive values to the total predicted positive values. This metric highlights the correct positive predictions out of all the positive predictions. High precision indicates low false positive rate.
-    \begin{equation} 
-     Precision (PPV)= \frac{TP}{TP + FP}
-    \end{equation}
-    \item \textbf{Recall (TPR)} - The recall is the ratio of correctly predicted positive values to the actual postive values. Recall highlights the sensitivity of the algorithm i.e. out of all the actual positives how many were caught by the program.
-    \begin{equation} 
-     Recall (TPR)= \frac{TP}{P}
-    \end{equation}
-    
-    \item \textbf{F1 Score} - F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account. Intuitively it is not as easy to understand as accuracy, but F1 is usually more useful than accuracy, especially if you have an uneven class distribution.
-    \begin{equation} 
-     F1 Score = \frac{2TP}{2TP + FP + FN}
-    \end{equation}
-\end{enumerate}
+The present research targets a \emph{minimal, resource-bounded} runtime monitor on a safety-related ECU. In that framing, Ekert \textit{et al.}~\cite{ekert2021cybersecurity} contextualises the scale and structure of automotive security testing; Williams \textit{et al.}~\cite{williams2022survey} explains why connectivity increases exposure on constrained nodes; and Plappert \textit{et al.}~\cite{plappert2023hta} together with Lorych and Plappert~\cite{lorych2024hta} ground trust mechanisms that could protect monitors and keys where software-only solutions are insufficient. Zhang \textit{et al.}~\cite{zhang2024context} and de Hoz Diego \textit{et al.}~\cite{dehoz2022iotdt} motivate automata- and rule-based runtime checks with selective observation---aligned with limiting bus or signal instrumentation on an ECU. ROSMonitoring~2.0~\cite{saadat2024rosmonitoring2} illustrates how modern tool chains compose middleware events with external oracles, which parallels composing a simulated ECU feed with an external monitor even when the vehicle stack is not ROS-based. Jak\v{s}i\'c \textit{et al.}~\cite{jaksic2018algebraic} provides vocabulary for quantitative or multi-valued verdicts if requirements later go beyond Boolean pass/fail.
+
+\subsection{Critical comparison and knowledge gaps}
+
+The surveyed work \textbf{complements} yet \textbf{does not fully cover} an integrated ECU-local runtime verification path. Surveys~\cite{krichen2023survey,williams2022survey} compare techniques at scale but, by design, stop short of prescribing a minimal monitor set for a single braking or powertrain controller. Digital-twin and IoT network studies~\cite{dehoz2022iotdt} optimise traffic observation on networked devices, whereas an ECU simulation emphasises \emph{internal} state and sensor plausibility rather than packet subsets. Automata-based context monitoring~\cite{zhang2024context} assumes rich environment models; replicating that fidelity on a student-grade simulation may trade precision for tractability. ROS-oriented tooling~\cite{saadat2024rosmonitoring2} demonstrates composable monitoring, but automotive CAN signal semantics and homologation test cases are not identical to ROS topics. HTA work~\cite{plappert2023hta,lorych2024hta} addresses roots of trust and update authentication yet leaves open \emph{what} temporal properties an on-device monitor should enforce under strict CPU/RAM caps. The algebraic framework~\cite{jaksic2018algebraic} generalises monitoring semantics but does not resolve deployment questions for legacy ECU binaries.
+
+\textbf{Knowledge gaps} salient for this project include: (i)~lack of published, reproducible pipelines that pair \emph{lightweight} ECU signal simulation with declarative monitors such as LARVA for automotive-grade properties; (ii)~fragmented guidance on calibrating thresholds (e.g.\ temperature, RPM) against both safety and cybersecurity abuse cases; (iii)~limited reporting on measured overhead when co-locating monitors with attestation or secure boot on class-A/B automotive microcontrollers. Addressing~(i)--(iii) experimentally would extend the literature beyond the surveyed sources while building directly on their methodological lessons.

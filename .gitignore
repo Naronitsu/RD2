@@ -1,0 +1,6 @@
+# Runtime benchmark outputs and logs
+src/resultCollection/runs/
+*.log
+
+# Maven/Java build artifacts
+src/SpringServer/target/

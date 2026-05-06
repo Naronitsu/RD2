@@ -1,28 +1,45 @@
 \section{Research Methodology}
 \label{sec:Res}
-\par This section is one of the most important parts of your research and it is the one that will receive most criticism. The reason is that here you document how you conducted your research. Since you are reading a B.Sc. degree you are expected to follow a scientific method, thus in this section you are expected to document: \textbf{the problem}; \textbf{hypothesis}; \textbf{aim \& objectives}; \textbf{research questions}; and \textbf{research pipeline}. Let's go through each.
 
-\par First start by providing a brief overview of the problem, similar to what you already mentioned in the previous sections. Then provide a hypothesis, this is the assumption you are making, which via your research you are attempting to prove or disprove. An example hypothesis in traffic management would be: \textit{By using image processing on public camera video feeds we believe that it is possible to estimate the traffic congestion at a higher precision than public traffic data feeds.}
+This section describes the empirical setup used to evaluate a minimal runtime verification layer over an automotive ECU telemetry stream. The approach is \textbf{trace-driven} and \textbf{monitor-centric}: recorded ECU time-series are replayed server-side, and an external runtime verifier checks those streams against formalised properties. The design follows a quasi-experimental logic~\cite{saunders2016research}: replay traces act as controlled behaviour sources, while monitors provide repeatable verdicts on normality versus violation. The deployment assumption is that an IoT/ECU endpoint forwards telemetry records to a server-side analysis service; hence measured overhead reflects server-side monitoring cost for ingested records, not direct on-device ECU execution overhead.
 
-\par After explaining the problem and hypothesis you need to specify why you are doing this research and what you think the output will be, so the aim \& objectives. Let us consider the \enquote{Marine Vessel Tracking} concept: \textit{With this research we aim to be able to automatically detect any anomalies within Marine traffic, such as drug smuggling, human trafficking and/or collisions.} Our objectives are:
+\subsection{Overall approach}
+
+The methodology proceeds in four stages: (1)~prepare a cleaned ECU dataset with stable schema and timestamps; (2)~construct an abnormal variant by injecting controlled violations into existing rows while preserving file size; (3)~deploy \textbf{LARVA}~\cite{colombo2009larva} in a Spring-based server endpoint that processes each sample and raises monitor states; and (4)~benchmark latency and throughput by replaying the same input under RV enabled versus disabled execution paths.
+
+Abela \textit{et al.}~\cite{abela2023rvtee} describe a prototype that couples LARVA with ROSMonitoring for robotic systems:
+
+\begin{quote}
+As a step towards deploying RV-TEE within robotic systems, we have developed a prototype which combines the RV tool which we have used in our previous works, Larva, with ROSMonitoring to successfully monitor a ROS-based system. Fig.~4 shows how ROSMonitoring listens for relevant events (also known as topics) occurring within the ROS application. These are then forwarded to the Larva monitor, which in turn can send back commands to the system being monitored. As ROSMonitoring is agnostic to the chosen verification system (also referred to as oracle) by design, it was not difficult to combine it with Larva.
+\end{quote}
+\noindent\hspace{1em}---Abela \textit{et al.}~\cite{abela2023rvtee}
+
+In this study, a server-side CSV replay service supplies the ordered event stream (analogous to middleware or bus traffic), and LARVA acts as the oracle, without mandating a ROS deployment.
+
+\subsection{Instrumentation: LARVA and flags}
+
+LARVA supports specification-driven monitoring of timed behaviour~\cite{colombo2009larva}. Each \emph{flag} below is implemented as a monitor property that raises a violation when its predicate becomes false. The evaluated assertion flags are:
+
 \begin{enumerate}
-    \item Identify existing data sets and manners of connecting them or even enriching them.
-    \item Review existing algorithms and propose a suitable model
-    \item Evaluate the effectiveness of the proposed model with real data and existing research.
+    \item \textbf{Voltage out of range under running RPM.} Trigger when RPM is above idle threshold and battery voltage is outside calibrated bounds.
+    \item \textbf{Coolant too high.} Trigger when coolant temperature exceeds a configured thermal safety limit.
+    \item \textbf{Throttle spike.} Trigger when throttle delta exceeds a threshold within a short runtime interval.
+    \item \textbf{Load--MAP mismatch.} Trigger when absolute disagreement between Load and MAPSource exceeds tolerance.
 \end{enumerate}
 
-\par So lastly you have to present a number of research questions that you attempt to answer, which ideally revolve around the \textbf{data set}, \textbf{algorithm} and \textbf{evaluation} which you documented in your literature review:
-\begin{enumerate}
-    \item Does a data set need to be created for such a research?
-    \item Which current technology is best suited to address the problem?
-    \item How does the proposed solution compare with existing solutions?
-\end{enumerate}
+Each flag is evaluated on replayed traces; the abnormal dataset injects approximately 20\% violation rows distributed across the four flags to validate that the corresponding LARVA specification fires, while benign traces provide a baseline for false-positive checks.
 
-\par Finally, you need a plan on how you intend to answer the research questions which will help you prove/disprove the hypothesis. Different research areas would require specific pipelines, yet a generic one is shown in Fig~\ref{fig:Pipeline}. After presenting an illustration of your pipeline it is recommended to documenting what has been done at every stage. Remember you should use past tense in this section since you are document what you have already done, since this paper will be published at the end of your research.
+\subsection{Benchmark protocol}
 
-\begin{figure}[ht]
-    \includegraphics[scale=0.25]{includes/pipeline.png}
-    \centering
-    \caption{Research Pipeline}
-    \label{fig:Pipeline}
-\end{figure}
+Two benchmark regimes are executed with identical machine and JVM conditions: \textbf{baseline} (clean trace) and \textbf{abnormal} (injected trace). In both regimes, the same endpoint and CSV shape are used, and only RV instrumentation is toggled through a per-request parameter (\texttt{rvEnabled=true/false}) and the global server setting (\texttt{rv.enabled}). Each regime runs warmup iterations followed by ten measured trials per mode. Reported metrics include rows processed, elapsed time, throughput (rows/s), average, standard deviation, p95/p99 latency, and overhead:
+\[
+\text{overhead}(\%)=\frac{\overline{t}_{\mathrm{RV\ on}}-\overline{t}_{\mathrm{RV\ off}}}{\overline{t}_{\mathrm{RV\ off}}}\times 100.
+\]
+
+\subsection{Research questions and validation}
+
+The following questions guide evaluation: (RQ1)~Do the four selected properties detect the injected abnormal classes with high recall? (RQ2)~What is the observed monitoring overhead relative to non-instrumented processing on the same server path? (RQ3)~How stable are latency and throughput across repeated runs (mean, standard deviation, and tail percentiles)? Answers are sought by structured log analysis and repeated trials, consistent with cybersecurity V\&V emphasis on repeatable test cases~\cite{ekert2021cybersecurity}.
+
+\subsection{Limitations}
+
+Results apply to the simulation and property set instantiated here; they do not replace homologation testing or formal verification of production ECU binaries. Future work could couple the same monitors with recorded CAN traces or hardware-in-the-loop benches.
