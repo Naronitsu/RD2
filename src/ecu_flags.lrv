@@ -1,0 +1,107 @@
+IMPORTS{
+import bridge.EcuSample;
+import bridge.JavaMonitorBridge;
+}
+
+GLOBAL{
+
+VARIABLES{
+boolean initialized = false;
+double prevThrottle = 0.0;
+double prevRunTime = 0.0;
+double prevLoad = 0.0;
+double prevMapSource = 0.0;
+}
+
+EVENTS{
+sampleReceived(EcuSample s) = {JavaMonitorBridge.onSample(s)}
+}
+
+PROPERTY ecuSafety{
+
+STATES{
+BAD{
+timeBackwards{}
+voltageOutOfRange{}
+coolantTooHigh{}
+throttleSpike{}
+loadMapMismatch{}
+}
+STARTING{
+ok{}
+}
+}
+
+TRANSITIONS{
+
+ok -> ok [sampleReceived\!initialized\
+initialized = true;
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+ok -> timeBackwards [sampleReceived\initialized && (s.EngineRunningTime < prevRunTime)\
+System.out.println("[LARVA][RD2] TIME_BACKWARDS prev=" + prevRunTime + " curr=" + s.EngineRunningTime);]
+
+ok -> voltageOutOfRange [sampleReceived\
+initialized
+&& (s.RPM > 900.0)
+&& ((s.BatteryVoltage_V < 11.5) || (s.BatteryVoltage_V > 15.5))\
+System.out.println("[LARVA][RD2] VOLTAGE_OUT_OF_RANGE v=" + s.BatteryVoltage_V + " rpm=" + s.RPM);]
+
+ok -> coolantTooHigh [sampleReceived\initialized && (s.CoolantTemp_C > 110.0)\
+System.out.println("[LARVA][RD2] COOLANT_TOO_HIGH C=" + s.CoolantTemp_C);]
+
+ok -> throttleSpike [sampleReceived\
+initialized
+&& ((s.EngineRunningTime - prevRunTime) > 0.0)
+&& ((s.EngineRunningTime - prevRunTime) <= 0.2)
+&& (Math.abs(s.ThrottlePosition - prevThrottle) > 25.0)\
+System.out.println("[LARVA][RD2] THROTTLE_SPIKE dThrottle=" + Math.abs(s.ThrottlePosition - prevThrottle) + " dt=" + (s.EngineRunningTime - prevRunTime));]
+
+ok -> loadMapMismatch [sampleReceived\
+initialized
+&& (Math.abs(s.Load - s.MAPSource) > 30.0)\
+System.out.println("[LARVA][RD2] LOAD_MAP_MISMATCH load=" + s.Load + " map=" + s.MAPSource);]
+
+ok -> ok [sampleReceived\initialized\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+timeBackwards -> ok [sampleReceived\true\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+voltageOutOfRange -> ok [sampleReceived\true\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+coolantTooHigh -> ok [sampleReceived\true\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+throttleSpike -> ok [sampleReceived\true\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+loadMapMismatch -> ok [sampleReceived\true\
+prevThrottle = s.ThrottlePosition;
+prevRunTime = s.EngineRunningTime;
+prevLoad = s.Load;
+prevMapSource = s.MAPSource;]
+
+}
+}
+
+}

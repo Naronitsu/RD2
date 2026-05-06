@@ -1,21 +1,48 @@
 \section{Findings \& Discussion of Results}
 \label{sec:Fin}
-\par This section is a delicate section and you are encouraged to be as honest and open as possible. The aim is not to show that you got a perfect solution to a long existing problem. Trying to state that in a few months you developed a perfect solution with 100\% is not convincing and raises doubts. It is recommended that you document your findings in every step of your research pipeline, highlighting your observations and decisions taken. Present your results and very importantly compare with existing research which you documented in Section~\ref{sec:Lit}. 
 
-\par The focus of the Project module is for you to delve into an area that exposes you to new technologies and offers you an opportunity to be critical of your work. So you are expected to document where your solution/research worked and where it did not. Reflect and document reasons why the solution/research did not perform as expected and propose ways of addressing this. From these observations you will produce new research questions in the next section. Consider the research in \enquote{Brand usage detection within audio streams}, where certain key terms were searched within videos, the results of which are documented in Table~\ref{tab:Accents}. You will notice that the terms \enquote{Peppa} and \enquote{Sushi} were the least recognised terms even by the best transcribers. Upon investigation we determined that \enquote{Peppa} was not recognised cause of voice morphing to create childish voices in the cartoon video, whilst \enquote{Sushi} was pronounced by a Japanese person speaking English. So the research student decided to focus his dissertation research on how to create a system that is able to recognise heavy accents to automate the configuration of a transcriber, in this case to cater for English spoken by a Japanese person, which accent is very different from an Indian accent, British accent or Italian accent, just to name a few.
+This section reports the experimental outcomes of the server-side ECU trace replay with LARVA instrumentation toggled on/off. Results are drawn from the benchmark session with tuned \texttt{loadMapMismatch} threshold (\texttt{|Load-MAPSource| > 60}), using 3 warmup runs and 10 measured runs per mode on the same machine and JVM conditions. The experiment assumes telemetry is transmitted from an IoT/ECU endpoint to a server-side verification API.
+
+\subsection{Result presentation}
+
+Two regimes were evaluated:
+\begin{itemize}
+    \item \textbf{Baseline regime:} clean trace (\texttt{20180713-home2mimos\_clean.csv}).
+    \item \textbf{Abnormal regime:} injected trace (\texttt{20180713-home2mimos\_clean\_abnormal.csv}) with approximately 20\% violation rows across four flags.
+\end{itemize}
+
+Table~\ref{tab:rv-overhead} summarises core timing and throughput metrics. Standard deviation is reported with each average to capture run-to-run variability.
 
 \begin{table}[ht]
     \centering
-    \caption{Recall results}
-    \label{tab:Accents}
-    \begin{tabular}{l|l|l|l|l}
-    \textbf{\#} & \textbf{Term}   & \textbf{Google} \textbf{Cloud} &\textbf{} \textbf{Google} \textbf{Speech} & \textbf{Sphinx} \textbf{CMU} \\ \hline
-    1        & Peppa  & 27\%             & 33\%              & 0\%        \\
-    2        & Peppa  & 33\%             & 22\%              & 0\%        \\
-    3        & Apple  & 96\%             & 92\%              & 79\%       \\
-    4        & Galaxy & 100\%            & 100\%             & 100\%      \\
-    5        & Galaxy & 95\%             & 95\%              & 80\%       \\
-    6        & Sushi  & 75\%             & 35\%              & 0\%        \\ \hline
-    ~       & Average & 71\%    & 62\%  &   43\%    \\
+    \caption{Runtime verification overhead summary (10 measured runs per mode)}
+    \label{tab:rv-overhead}
+    \begin{tabular}{l|c|c}
+    \textbf{Metric} & \textbf{Baseline} & \textbf{Abnormal} \\ \hline
+    RV ON elapsed (ms) & 113.0 $\pm$ 7.18 & 4274.8 $\pm$ 137.40 \\
+    RV OFF elapsed (ms) & 104.3 $\pm$ 8.39 & 105.5 $\pm$ 4.09 \\
+    RV ON throughput (rows/s) & 607{,}526.6 $\pm$ 33{,}682.8 & 16{,}023.1 $\pm$ 506.6 \\
+    RV OFF throughput (rows/s) & 659{,}328.3 $\pm$ 44{,}358.5 & 649{,}524.9 $\pm$ 24{,}972.4 \\
+    Overhead (\%) & 8.34 & 3951.94 \\
     \end{tabular}
 \end{table}
+
+Tail latency also reflects this split behaviour. For baseline, RV ON p95/p99 are 124.0/131.2 ms, while RV OFF p95/p99 are 117.2/125.84 ms. For abnormal traces, RV ON p95/p99 rise to 4497.6/4530.72 ms, whereas RV OFF remains at 111.0/111.0 ms.
+
+\subsection{Analysis and interpretation}
+
+\textbf{RQ1 (detection of injected abnormalities).} The abnormal regime produced high RV ON flag totals (\texttt{coolantTooHigh}=34210, \texttt{voltageOutOfRange}=34200, \texttt{throttleSpike}=34220, \texttt{loadMapMismatch}=34230), while RV OFF flags remained zero. This indicates that violation reporting is coupled to monitor execution as intended and that injected abnormal classes are detected consistently.
+
+\textbf{RQ2 (monitoring overhead).} Baseline overhead is moderate (8.34\%), suggesting that monitor integration is feasible for non-adversarial trace processing on the tested server path. However, abnormal overhead is very high (3951.94\%), showing that violation-heavy execution paths can dominate runtime. In other words, monitor cost is not constant; it is strongly state-dependent. These overhead values should be interpreted as server-side verification cost under a telemetry-upload architecture.
+
+\textbf{RQ3 (stability and threshold sensitivity).} Standard deviations are small relative to means in most cases, indicating repeatable behaviour. After tuning \texttt{loadMapMismatch} from 30 to 60, baseline false positives reduced (aggregate baseline \texttt{loadMapMismatch} decreased compared with pre-tuning runs), while abnormal detection remained strong. This supports threshold calibration as a practical control for false-positive pressure.
+
+\subsection{Comparison with related work and quality considerations}
+
+The observed trade-off aligns with prior RV literature: runtime monitoring provides actionable safety/cybersecurity visibility, but overhead depends on property design, trigger frequency, and deployment context~\cite{krichen2023survey,zhang2024context,jaksic2018algebraic}. The clear difference between baseline and abnormal runtime also mirrors broader automotive V\&V concerns, where worst-case and abuse-case behaviour must be measured rather than assumed from nominal conditions~\cite{ekert2021cybersecurity}.
+
+\textbf{Validity.} Internal validity is strengthened by same-endpoint comparisons, warmup before measured runs, and on/off toggling as the only intended treatment factor. Construct validity is supported by explicit metrics (elapsed time, throughput, p95/p99, overhead) and deterministic replay inputs.
+
+\textbf{Reliability.} Repeated 10-run measurements with reported standard deviations indicate reproducibility under stable local conditions.
+
+\textbf{Generalizability.} External validity remains limited to this server-side replay implementation and selected property set. Results should not be extrapolated directly to production ECUs without hardware-in-the-loop or in-vehicle evaluation.

@@ -1,0 +1,101 @@
+{
+  "sessionDir": "c:\\Users\\brama\\Documents\\RD2\\src\\resultCollection\\runs\\session-20260506-100232",
+  "baseline": {
+    "mode": "baseline",
+    "sourceCsv": "c:\\Users\\brama\\Documents\\RD2\\src\\resultCollection\\runs\\session-20260506-100232\\baseline\\benchmark-runs.csv",
+    "rvOn": {
+      "elapsedMs": {
+        "count": 10,
+        "mean": 113.0,
+        "stddev": 7.180219742846005,
+        "median": 110.5,
+        "min": 109.0,
+        "max": 133.0,
+        "p95": 123.99999999999997,
+        "p99": 131.2
+      },
+      "rowsPerSec": {
+        "count": 10,
+        "mean": 607526.573809575,
+        "stddev": 33682.84152842434,
+        "median": 619315.8476658475,
+        "min": 514533.834586466,
+        "max": 627825.688073394,
+        "p95": 627825.688073394,
+        "p99": 627825.688073394
+      }
+    },
+    "rvOff": {
+      "elapsedMs": {
+        "count": 10,
+        "mean": 104.3,
+        "stddev": 8.393780766469634,
+        "median": 102.0,
+        "min": 100.0,
+        "max": 128.0,
+        "p95": 117.19999999999997,
+        "p99": 125.84
+      },
+      "rowsPerSec": {
+        "count": 10,
+        "mean": 659328.2853044778,
+        "stddev": 44358.480812843336,
+        "median": 670911.764705882,
+        "min": 534632.8125,
+        "max": 684330.0,
+        "p95": 681281.0049504952,
+        "p99": 683720.2009900991
+      }
+    },
+    "overheadPct": 8.34132310642378
+  },
+  "abnormal": {
+    "mode": "abnormal",
+    "sourceCsv": "c:\\Users\\brama\\Documents\\RD2\\src\\resultCollection\\runs\\session-20260506-100232\\abnormal\\benchmark-runs.csv",
+    "rvOn": {
+      "elapsedMs": {
+        "count": 10,
+        "mean": 4274.8,
+        "stddev": 137.3954552054438,
+        "median": 4266.5,
+        "min": 4086.0,
+        "max": 4539.0,
+        "p95": 4497.599999999999,
+        "p99": 4530.72
+      },
+      "rowsPerSec": {
+        "count": 10,
+        "mean": 16023.11391997227,
+        "stddev": 506.5887148964966,
+        "median": 16039.6111425894,
+        "min": 15076.6688697951,
+        "max": 16748.1644640235,
+        "p95": 16628.361842496175,
+        "p99": 16724.203939718034
+      }
+    },
+    "rvOff": {
+      "elapsedMs": {
+        "count": 10,
+        "mean": 105.5,
+        "stddev": 4.089281382128433,
+        "median": 104.0,
+        "min": 100.0,
+        "max": 111.0,
+        "p95": 111.0,
+        "p99": 111.0
+      },
+      "rowsPerSec": {
+        "count": 10,
+        "mean": 649524.9221607235,
+        "stddev": 24972.423565494133,
+        "median": 658009.615384615,
+        "min": 616513.513513513,
+        "max": 684330.0,
+        "p95": 678291.7941176469,
+        "p99": 683122.3588235293
+      }
+    },
+    "overheadPct": 3951.9431279620853
+  }
+}

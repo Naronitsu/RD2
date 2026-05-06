@@ -1,0 +1,43 @@
+﻿{
+    "createdAt":  "2026-05-06T10:03:41.0927930+02:00",
+    "label":  "abnormal",
+    "serverUrl":  "http://localhost:18086",
+    "csvPath":  "C:\\Users\\brama\\Documents\\RD2\\dataset\\20180713-home2mimos_clean_abnormal.csv",
+    "warmupRuns":  3,
+    "measuredRuns":  10,
+    "rvOn":  {
+                 "mode":  "rv_on",
+                 "runs":  10,
+                 "rowsProcessed":  68433,
+                 "avgElapsedMs":  4274.8,
+                 "stddevElapsedMs":  137.39545520544377,
+                 "avgRowsPerSec":  16023.113919972264,
+                 "stddevRowsPerSec":  506.58871489648664,
+                 "p95ElapsedMs":  4497.5999999999995,
+                 "p99ElapsedMs":  4530.72,
+                 "flagsTotal":  {
+                                    "coolantTooHigh":  34210,
+                                    "voltageOutOfRange":  34200,
+                                    "throttleSpike":  34220,
+                                    "loadMapMismatch":  34230
+                                }
+             },
+    "rvOff":  {
+                  "mode":  "rv_off",
+                  "runs":  10,
+                  "rowsProcessed":  68433,
+                  "avgElapsedMs":  105.5,
+                  "stddevElapsedMs":  4.0892813821284326,
+                  "avgRowsPerSec":  649524.922160724,
+                  "stddevRowsPerSec":  24972.423565494035,
+                  "p95ElapsedMs":  111,
+                  "p99ElapsedMs":  111,
+                  "flagsTotal":  {
+                                     "coolantTooHigh":  0,
+                                     "voltageOutOfRange":  0,
+                                     "throttleSpike":  0,
+                                     "loadMapMismatch":  0
+                                 }
+              },
+    "overheadPct":  3951.9431279620853
+}
