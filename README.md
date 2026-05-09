@@ -1,10 +1,7 @@
 # Minimal, Resource-Bounded Runtime Verification for a Safety-Critical Automotive ECU
 
 ## Name
-Damian Navarro
-
-## Class
-ITRSH-606-2102 - Research Design II (MCAST IICT, 2025/2026)
+Damian Navarro 6.3B
 
 ## Abstract
 This project investigates a minimal runtime verification (RV) pipeline for safety-critical automotive ECU telemetry under resource constraints. A Spring-based replay service processes full ECU traces (68,433 rows per run), while LARVA-generated monitors evaluate four safety-related properties: time progression consistency, voltage range validity under load, coolant temperature bounds, and throttle/load-MAP behavioral checks. The study uses a controlled quantitative experiment with RV enabled versus disabled over clean and injected-abnormal datasets, reporting elapsed time, throughput, process CPU time, heap-delta indicators, and violation flag totals.
