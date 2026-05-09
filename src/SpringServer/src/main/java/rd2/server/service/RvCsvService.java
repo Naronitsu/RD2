@@ -2,9 +2,11 @@ package rd2.server.service;
 
 import bridge.EcuSample;
 import bridge.JavaMonitorBridge;
+import com.sun.management.OperatingSystemMXBean;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,10 @@ public class RvCsvService {
 
     public RvResult analyze(MultipartFile file, Boolean rvEnabledOverride) throws IOException {
         boolean rvEnabled = rvEnabledOverride != null ? rvEnabledOverride.booleanValue() : defaultRvEnabled;
+        OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        Runtime runtime = Runtime.getRuntime();
+        long cpuStartNs = osBean.getProcessCpuTime();
+        long heapBefore = runtime.totalMemory() - runtime.freeMemory();
         long startNs = System.nanoTime();
 
         BufferedReader reader = new BufferedReader(
@@ -70,6 +76,12 @@ public class RvCsvService {
         }
 
         result.elapsedMs = (System.nanoTime() - startNs) / 1_000_000L;
+        long cpuEndNs = osBean.getProcessCpuTime();
+        long heapAfter = runtime.totalMemory() - runtime.freeMemory();
+        result.cpuTimeMs = (cpuEndNs - cpuStartNs) / 1_000_000.0;
+        result.heapUsedBeforeBytes = heapBefore;
+        result.heapUsedAfterBytes = heapAfter;
+        result.heapDeltaBytes = heapAfter - heapBefore;
         return result;
     }
 

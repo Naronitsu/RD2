@@ -112,10 +112,14 @@ function Build-ModeSummary {
 
   $elapsed = @()
   $throughputs = @()
+  $cpuMs = @()
+  $heapDeltaBytes = @()
   foreach ($r in $Runs) {
     $ms = [double]$r.elapsedMs
     $rows = [double]$r.rowsProcessed
     $elapsed += $ms
+    $cpuMs += [double]$r.cpuTimeMs
+    $heapDeltaBytes += [double]$r.heapDeltaBytes
     if ($ms -gt 0) {
       $throughputs += ($rows / ($ms / 1000.0))
     } else {
@@ -125,8 +129,12 @@ function Build-ModeSummary {
 
   $avgElapsed = [double](($elapsed | Measure-Object -Average).Average)
   $avgThroughput = [double](($throughputs | Measure-Object -Average).Average)
+  $avgCpuMs = [double](($cpuMs | Measure-Object -Average).Average)
+  $avgHeapDeltaBytes = [double](($heapDeltaBytes | Measure-Object -Average).Average)
   $stdElapsed = StdDevSample -Values $elapsed
   $stdThroughput = StdDevSample -Values $throughputs
+  $stdCpuMs = StdDevSample -Values $cpuMs
+  $stdHeapDeltaBytes = StdDevSample -Values $heapDeltaBytes
   $rowsProcessed = [int64]$Runs[-1].rowsProcessed
   $p95 = Percentile -Values $elapsed -P 95
   $p99 = Percentile -Values $elapsed -P 99
@@ -140,6 +148,10 @@ function Build-ModeSummary {
     stddevElapsedMs = $stdElapsed
     avgRowsPerSec = $avgThroughput
     stddevRowsPerSec = $stdThroughput
+    avgCpuMs = $avgCpuMs
+    stddevCpuMs = $stdCpuMs
+    avgHeapDeltaBytes = $avgHeapDeltaBytes
+    stddevHeapDeltaBytes = $stdHeapDeltaBytes
     p95ElapsedMs = $p95
     p99ElapsedMs = $p99
     flagsTotal = $flagsTotal
@@ -213,6 +225,10 @@ for ($i = 0; $i -lt $MeasuredRuns; $i++) {
     run = $i + 1
     onElapsedMs = [double]$on.elapsedMs
     offElapsedMs = [double]$off.elapsedMs
+    onCpuMs = [double]$on.cpuTimeMs
+    offCpuMs = [double]$off.cpuTimeMs
+    onHeapDeltaBytes = [double]$on.heapDeltaBytes
+    offHeapDeltaBytes = [double]$off.heapDeltaBytes
     onRowsProcessed = [int64]$on.rowsProcessed
     offRowsProcessed = [int64]$off.rowsProcessed
     onRowsPerSec = if ([double]$on.elapsedMs -gt 0) { [double]$on.rowsProcessed / ([double]$on.elapsedMs / 1000.0) } else { [double]::PositiveInfinity }
@@ -230,6 +246,8 @@ Write-Host ("avgOnMs={0:N2} avgOffMs={1:N2}" -f $summaryOn.avgElapsedMs, $summar
 Write-Host ("stdOnMs={0:N2} stdOffMs={1:N2}" -f $summaryOn.stddevElapsedMs, $summaryOff.stddevElapsedMs)
 Write-Host ("avgOnRowsPerSec={0:N2} avgOffRowsPerSec={1:N2}" -f $summaryOn.avgRowsPerSec, $summaryOff.avgRowsPerSec)
 Write-Host ("stdOnRowsPerSec={0:N2} stdOffRowsPerSec={1:N2}" -f $summaryOn.stddevRowsPerSec, $summaryOff.stddevRowsPerSec)
+Write-Host ("avgOnCpuMs={0:N2} avgOffCpuMs={1:N2}" -f $summaryOn.avgCpuMs, $summaryOff.avgCpuMs)
+Write-Host ("avgOnHeapDeltaMB={0:N4} avgOffHeapDeltaMB={1:N4}" -f ($summaryOn.avgHeapDeltaBytes / 1MB), ($summaryOff.avgHeapDeltaBytes / 1MB))
 Write-Host ("p95OnMs={0:N2} p95OffMs={1:N2}" -f $summaryOn.p95ElapsedMs, $summaryOff.p95ElapsedMs)
 Write-Host ("p99OnMs={0:N2} p99OffMs={1:N2}" -f $summaryOn.p99ElapsedMs, $summaryOff.p99ElapsedMs)
 Write-Host ("overheadPct={0:N2}" -f $overheadPct)

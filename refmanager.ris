@@ -1,0 +1,269 @@
+TY  - JOUR
+AB  - Runtime verification (RV) is a pragmatic and scalable, yet rigorous technique, to assess the correctness of complex systems, including cyber-physical systems (CPS). By measuring how robustly a CPS run satisfies a specification, RV allows in addition, to quantify the resiliency of a CPS to perturbations. In this paper we propose Algebraic Runtime Verification (ARV), a general, semantic framework for RV, which takes advantage of the monoidal structure of runs (w.r.t. concatenation) and the semiring structure of a specification automaton (w.r.t. choice and concatenation), to compute in an incremental and application specific fashion the resiliency measure. This allows us to expose the core aspects of RV, by developing an abstract monitoring algorithm, and to strengthen and unify the various qualitative and quantitative approaches to RV, by instantiating choice and concatenation with real-valued functions as dictated by the application. We demonstrate the power and effectiveness of our framework on two case studies from the automotive domain.
+AU  - Jaksic, Stefan
+AU  - Bartocci, Ezio
+AU  - Grosu, Radu
+AU  - Nickovic, Dejan
+DA  - 2018/2//
+PY  - 2018
+TI  - An Algebraic Framework for Runtime Verification
+UR  - http://arxiv.org/abs/1802.03775
+ER  -
+TY  - JOUR
+AB  - The automotive trend towards autonomous driving and advanced connected services increases both complexity of the vehicle internal network and the connections to its environment. This introduced complexity further broadens the vehicle cyberattack surface. As mitigation strategy, state-of-the-art security mechanisms utilize so-called hardware trust anchors (HTAs) to protect security-sensitive data and processes in shielded locations that are isolated utilizing hardware security mechanisms. However, there is a variety of different HTAs with different functionality and security guarantees and there is currently no work done that compares and evaluates them against current and emerging automotive requirements. In this work, we evaluate the applicability of various HTAs to secure modern as well as upcoming future automotive applications. For this, we analyze and evaluate HTAs that are already established in the automotive field as well as promising HTAs from other domains. We extend our preliminary work (Plappert et al., 2022b) by increasing the range of the analyzed HTAs with solutions that are feasible for the most resource constrained automotive controllers and technologies that become feasible to be utilized by the introduction of high-performance controllers in future automotive architectures. We assess the different HTAs based on the evaluation criteria and in accordance to automotive requirements.
+AU  - Plappert, Christian
+AU  - Lorych, Dominik
+AU  - Eckel, Michael
+AU  - Jäger, Lukas
+AU  - Fuchs, Andreas
+AU  - Heddergott, Ronald
+DA  - 2023/12//
+DO  - 10.1016/j.cose.2023.103514
+KW  - ARM TrustZone
+KW  - Automotive
+KW  - Device Identifier Composition Engine (DICE)
+KW  - EVITA
+KW  - Evaluation
+KW  - Hardware Security Module (HSM)
+KW  - Hardware trust anchor (HTA)
+KW  - Intel Software Guard Extensions (SGX)
+KW  - Secure Hardware Extension (SHE)
+KW  - Trusted Platform Module (TPM)
+PB  - Elsevier Ltd
+PY  - 2023
+TI  - Evaluating the applicability of hardware trust anchors for automotive applications
+T2  - Computers and Security
+VL  - 135
+ER  -
+TY  - CONF
+AB  - Secure firmware update mechanisms and Hardware Trust Anchors (HTAs) are crucial in securing future IoT networks. Among others, HTAs can be used to shield security-sensitive data like cryptographic keys from unauthorized access, using hardware isolation. Authentication mechanisms for key usage, however, are difficult to implement since corresponding credentials need to be stored outside the HTA. This makes them vulnerable against host hijacking attacks, which in the end also undermines the security gains of the HTA deployment. This paper introduces an update-resilient and secure HTA authentication mechanism that secures the HTA authentication credentials on the host. Our concept is based on an integration of the Device Identifier Composition Engine (DICE), a Trusted Computing standard for resource-constrained off-the-shelf devices, with signed update manifest documents. This secures HTA authentication credentials, but also provides value for DICE-based devices without an HTA. We evaluate the feasibility of our solution based on a proof-of-concept implementation.
+AU  - Lorych, Dominik
+AU  - Plappert, Christian
+DA  - 2024/7//
+DO  - 10.1145/3664476.3664479
+KW  - Device Identifier Composition Engine (DICE)
+KW  - Hardware Trust Anchor (HTA)
+KW  - SUIT manifests
+KW  - authentication
+KW  - firmware updates
+PB  - Association for Computing Machinery
+PY  - 2024
+SN  - 9798400717185
+TI  - Hardware Trust Anchor Authentication for Updatable IoT Devices
+T2  - ACM International Conference Proceeding Series
+ER  -
+TY  - JOUR
+AB  - The Internet of Things (IoT) has brought about a new era of connected devices and systems, with applications ranging from healthcare to transportation. However, the reliability and security of these systems are critical concerns that must be addressed to ensure their safe and effective operation. This paper presents a survey of formal verification and validation (FV&V) techniques for IoT systems, with a focus on the challenges and open issues in this field. We provide an overview of formal methods and testing techniques for the IoT and discuss the state explosion problem and techniques to address it. We also examined the use of AI in software testing and describe examples of tools that use AI in this context. Finally, we discuss the challenges and open issues in FV&V for the IoT and present possible future directions for research. This survey paper aimed to provide a comprehensive understanding of the current state of FV&V techniques for IoT systems and to highlight areas for further research and development.
+AU  - Krichen, Moez
+DA  - 2023/7//
+DO  - 10.3390/app13148122
+IS  - 14
+KW  - Internet of Things
+KW  - formal verification
+KW  - testing techniques
+KW  - validation
+PB  - Multidisciplinary Digital Publishing Institute (MDPI)
+PY  - 2023
+TI  - A Survey on Formal Verification and Validation Techniques for Internet of Things
+T2  - Applied Sciences (Switzerland)
+VL  - 13
+ER  -
+TY  - RPRT
+AB  - Safety-critical systems are growing more complex and becoming increasingly autonomous. Runtime Verification (RV) has the potential to provide protections when a system cannot be assured by conventional means, but only if the RV itself can be trusted. In this paper, we proffer a number of challenges to realizing high-assurance RV and illustrate how we have addressed them in our research. We argue that high-assurance RV provides a rich target for automated verification tools in hope of fostering closer collaboration among the communities.
+AU  - Goodloe, Alwyn
+TI  - Challenges in High-Assurance Runtime Verification
+UR  - http://hackage.haskell.org/package/sbv,
+ER  -
+TY  - CONF
+AB  - Formal verification of robotic applications presents challenges due to their hybrid nature and distributed architecture. This paper introduces ROSMonitoring 2.0, an extension of ROSMonitoring designed to facilitate the monitoring of both topics and services while considering the order in which messages are published and received. The framework has been enhanced to support these novel features for ROS1 – and partially ROS2 environments – offering improved real-time support, security, scalability, and interoperability. We discuss the modifications made to accommodate these advancements and present results obtained from a case study involving the runtime monitoring of specific components of a fire-fighting Uncrewed Aerial Vehicle (UAV).
+AU  - Saadat, Maryam Ghaffari
+AU  - Ferrando, Angelo
+AU  - Dennis, Louise A.
+AU  - Fisher, Michael
+DA  - 2024/11//
+DO  - 10.4204/EPTCS.411.3
+PB  - Open Publishing Association
+PY  - 2024
+SP  - 38
+EP  - 55
+TI  - ROSMonitoring 2.0: Extending ROS Runtime Verification to Services and Ordered Topics
+T2  - Electronic Proceedings in Theoretical Computer Science, EPTCS
+VL  - 411
+ER  -
+TY  - JOUR
+AB  - Publish/subscribe (pub/sub) networks are a cornerstone of modern distributed systems, playing a crucial role in applications like the Internet of Things (IoT) and robotics. While runtime verification techniques seem ideal for ensuring the correctness of such highly dynamic and large-scale networks, integrating runtime monitors seamlessly into real-world industrial use cases presents significant challenges. This paper studies modern containerization technology to deploy runtime verification tools to monitor publish/subscribe networks with a performance focus. Runtime verification containers are lightweight and deployable alongside other containerized publisher and subscriber participants. Each runtime verification container monitors message flow, enabling runtime verification of network behavior. We comprehensively benchmark the container-based approach using several experiments and a real-world case study from the software-defined vehicle domain.
+AU  - Mehran, Ali
+AU  - Ulus, Dogan
+DA  - 2024/8//
+PY  - 2024
+TI  - Runtime Verification Containers for Publish/Subscribe Networks
+UR  - http://arxiv.org/abs/2408.06380
+ER  -
+TY  - CONF
+AB  - A security decoupling approach for IoT device communications is presented, based on a Digital Twin with runtime verification capabilities. The solution proposed assumes that a local agent (security module) can be deployed to the IoT device by the IoT server. The runtime verification approach implemented in the Digital Twin detects possible violations of protected communications from either a remote device or a local compromised process and provides timely and valuable information for countering a potential cyber-security attack. Moreover, only a subset of the observed traffic needs to be monitored, which induces negligible overhead and allows deploying the Digital Twin in IoT devices with limited computational resources. Runtime verification was implemented by adopting a rule-based approach for monitoring parametric events, i.e. the packets that carry data.
+AU  - de Hoz Diego, Jorge David
+AU  - Temperekidis, Anastasios
+AU  - Katsaros, Panagiotis
+AU  - Konstantinou, Charalambos
+DO  - 10.1007/978-3-031-19849-6_31
+KW  - Digital twin
+KW  - IoT
+KW  - Runtime verification
+KW  - Security-by-design
+PB  - Springer Science and Business Media Deutschland GmbH
+PY  - 2022
+SN  - 9783031198489
+SP  - 556
+EP  - 574
+TI  - An IoT Digital Twin for Cyber-Security Defence Based on Runtime Verification
+T2  - Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)
+VL  - 13701 LNCS
+ER  -
+TY  - RPRT
+AB  - Autonomous and robotic systems are increasingly being trusted with sensitive activities with potentially serious consequences if that trust is broken. Runtime verification techniques present a natural source of inspiration for monitoring and enforcing the desirable properties of the communication protocols in place, providing a formal basis and ways to limit intrusiveness. A recently proposed approach , RV-TEE, shows how runtime verification can enhance the level of trust to the Rich Execution Environment (REE), consequently adding a further layer of protection around the Trusted Execution Environment (TEE). By reflecting on the implication of deploying RV in the context of trustworthy computing, we propose practical solutions to two threat models for the RV-TEE monitoring process: one where the adversary has gained access to the system without elevated privileges, and another where the adversary gains all privileges to the host system but fails to steal secrets from the TEE.
+AU  - Abela, Robert
+AU  - Colombo, Christian
+AU  - Curmi, Axel
+AU  - Fenech, Mattea
+AU  - Vella, Mark
+AU  - Ferrando, Angelo
+TI  - Runtime Verification for Trustworthy Computing
+UR  - https://securityintelligence.com/heartbleed-openssl-vulnerability-what-to-do-protect/,
+ER  -
+TY  - BOOK
+AB  - " ... took place October 29-31, 2018 in Los Angeles, CA, USA."--PDF copyright page. 
+PB  - IEEE
+PY  - 2018
+SN  - 9781538671856
+TI  - MILCOM 2018-2018 IEEE Military Communications Conference (MILCOM) : 29-31 Oct. 2018
+ER  -
+TY  - JOUR
+AB  - The explosive growth of the Internet of Things (IoT) devices is an inevitable trend, especially considering the fact that 5G technology facilitates numerous services building on IoT devices. IoT devices deliver great convenience to our daily lives; nevertheless, they are becoming attractive attacking targets. Compromised IoT devices can result in the exposure of user privacy, damage to network security, or even threats to personal safety. In a rush for convenience and marketability, the security of these devices is usually less considered during production and even ignored. Under these circumstances, Remote Attestation (RA) becomes a valuable security service. It outsources the computation and verification burden to a resource-rich party, e.g., server, to ease its on-device implementation, making it suitable for protocol extensions. In this paper, we investigate the state-of-the-art RA schemes from different perspectives, aiming to offer a comprehensive understanding of this security service. Specifically, we summarize the basis of RA. We set up an elaborate adversarial model by systematizing existing RA schemes. Then we put forward the evaluation criteria from protection capability, performance, network adaptability, and attestation quality. According to the adversarial model, we classify existing RA schemes into five categories to show the various characteristics. A comparison of representative proposals enables readers to adopt and design suitable protocols in different application scenarios. Finally, we discuss some open challenges and provision prospects for future research.
+AU  - Kuang, Boyu
+AU  - Fu, Anmin
+AU  - Susilo, Willy
+AU  - Yu, Shui
+AU  - Gao, Yansong
+DA  - 2022/1//
+DO  - 10.1016/j.cose.2021.102498
+KW  - 5G
+KW  - Artificial intelligence
+KW  - Internet of Things
+KW  - Remote attestation
+KW  - Security
+PB  - Elsevier Ltd
+PY  - 2022
+TI  - A survey of remote attestation in Internet of Things: Attacks, countermeasures, and prospects
+T2  - Computers and Security
+VL  - 112
+ER  -
+TY  - JOUR
+AB  - The new generations of cars have a number of ECUs (Electronic Control Units) which are connected to a central gateway and need to pass cybersecurity integration tests to fulfil the homologation requirements of cars. Cars usually have a gateway server (few have additional domain servers) with Linux and a large number of ECUs which are real time control of actuators (ESP, EPS, ABS, etc. – usually they are multicore embedded controllers) connected by a real time automotive specific bus (CAN-FD) to the domain controller or gateway server. The norms (SAE J3061, ISO 21434) require cybersecurity related verification and validation. Fir the verification car manufacturers use a network test suite which runs > 2000 test cases and which have to be passed for homologation. These norms have impact on the way how car communication infrastructure is tested, and which cybersecurity attack patterns are checked before a road release of an ECU/car. This paper describes typical verification and validation approaches in modern vehicles and how such test cases are derived and developed.
+AU  - Ekert, Damjan
+AU  - Dobaj, Jürgen
+AU  - Salamun, Alen
+DO  - 10.3897/JUCS.71833
+IS  - 8
+KW  - Automotive Cybersecurity
+KW  - Best Practice Design Patterns
+KW  - Validation
+KW  - Verification
+PB  - IICM
+PY  - 2021
+SP  - 850
+EP  - 867
+TI  - Cybersecurity verification and validation testing in automotive
+T2  - Journal of Universal Computer Science
+VL  - 27
+ER  -
+TY  - JOUR
+AB  - The critical and sensitive nature of data that the Internet-of-Things (IoT) devices produce makes them an attractive target for cyber attacks. Among the various types of attacks, malware is becoming a major concern for the IoT device. This article proposes a remote attestation protocol, hybrid remote attestation, which ensures the high availability of IoT devices during the software attestation process. The proposed attestation technique uses a randomized approach to attest different parts of an IoT device's memory. We use physical unclonable functions (PUFs) to protect the secrets of an IoT device from physical attacks. The security analysis shows that the proposed attestation technique can effectively detect roving malware. Implementation of the proposed protocol on Raspberry Pi and AVR/ARM-based ATMEL microcontrollers and comparison with existing techniques shows that the proposed protocol results in significantly higher availability and lower energy consumption.
+AU  - Aman, Muhammad Naveed
+AU  - Basheer, Mohamed Haroon
+AU  - Dash, Siddhant
+AU  - Wong, Jun Wen
+AU  - Xu, Jia
+AU  - Lim, Hoon Wei
+AU  - Sikdar, Biplab
+DA  - 2020/8//
+DO  - 10.1109/JIOT.2020.2983655
+IS  - 8
+KW  - Internet of Things (IoT)
+KW  - malware
+KW  - network security
+KW  - remote attestation
+PB  - Institute of Electrical and Electronics Engineers Inc.
+PY  - 2020
+SP  - 7220
+EP  - 7233
+TI  - HAtt: Hybrid Remote Attestation for the Internet of Things with High Availability
+T2  - IEEE Internet of Things Journal
+VL  - 7
+ER  -
+TY  - JOUR
+AB  - Intelligent Transport System (ITS) is a typical class of Cyber-Physical Systems (CPS), and due to the special characteristics of such systems, higher requirements are placed on system security. Runtime verification is a lightweight verification technique which is used to improve the security of such systems. However, current runtime verification methods often ignore the effects of the physical environment (e.g., the effects of rain, snow, and other weather changes on road conditions), which results in the inability of the monitor to effectively monitor the system according to the changes in the environment. To address this problem, this paper proposes a method for constructing a runtime monitor with environmental context-awareness capability. First, the physical environment factors affecting the system are formally described and constructed into an environment model, then the system statute is transformed into a Büchi automaton, and then a synthesis algorithm combining the environment model and the Büchi automaton is designed based on the network of automatons, and the corresponding monitor is generated. Finally, the proposed method is applied and verified on simulation and real objects. The experimental results show that the monitors generated based on the method of this paper can effectively monitor unsafe events in different environments, thus improving the safety of intelligent driving systems.
+AU  - Zhang, Yu
+AU  - Xu, Sijie
+AU  - Chen, Hongyi
+AU  - Aslam Bhatt, Uzair
+AU  - Huang, Mengxing
+DA  - 2024/12//
+DO  - 10.1186/s13677-023-00567-8
+IS  - 1
+KW  - Automata
+KW  - Environmental modelling
+KW  - ITS
+KW  - Runtime monitoring
+PB  - Springer Science and Business Media Deutschland GmbH
+PY  - 2024
+TI  - Context-aware environment online monitoring for safety autonomous vehicle systems: an automata-theoretic approach
+T2  - Journal of Cloud Computing
+VL  - 13
+ER  -
+TY  - JOUR
+AB  - Internet of Things (IoT) systems promise a seamless connected world with machines integrating their services without human intervention. It's highly probable that the entities participating in such autonomous machine to machine interactions are to be provided by different manufactures. Thus, integrating such heterogeneous devices from many providers complicates design and verification of IoT systems at an unprecedented scale. In this paper, we propose a novel runtime verification approach for IoT systems. The contributions of our proposed solution include: exploiting the interactions in message sequence charts (MSC) to specify message exchanges of constrained application protocol-based IoT systems in terms of events, a novel event calculus for formally describing IoT system constraints specified by means of MSCs, and an event processing algebra that uses complex-event processing techniques for detecting failures in the system by monitoring the runtime event occurrences with respect to the system constraints defined by event calculus. We further demonstrate the viability of proposed solution with case studies.
+AU  - Incki, Koray
+AU  - Ari, Ismail
+DA  - 2018/3//
+DO  - 10.1109/ACCESS.2018.2813887
+KW  - Internet of Things
+KW  - complex-event processing
+KW  - event calculus
+KW  - message sequence charts
+KW  - runtime verification
+PB  - Institute of Electrical and Electronics Engineers Inc.
+PY  - 2018
+SP  - 13501
+EP  - 13512
+TI  - A Novel Runtime Verification Solution for IoT Systems
+T2  - IEEE Access
+VL  - 6
+ER  -
+TY  - GEN
+AB  - Internet of Things (IoT) have opened the door to a world of unlimited possibilities for implementations in varied sectors in society, but it also has many challenges. One of those challenges is security and privacy. IoT devices are more susceptible to security threats and attacks. Due to constraints of the IoT devices such as area, power, memory, etc., there is a lack of security solutions that are compatible with IoT devices and applications, which is leading this world of securely connected things to the “internet of insecure things.” A promising solution to this problem is going beyond the standard or classical techniques to implementing the security solutions in the hardware of the IoT device. The integration of emerging technologies in IoT networks, such as machine learning, blockchain, fog/edge/cloud computing, and quantum computing have added more vulnerable points in the network. This paper introduces a comprehensive study on IoT security threats and solutions. Additionally, this survey outlines how emerging technologies such as machine learning and blockchain are integrated in IoT, challenges resulted from this integration, and potential solutions to these challenges. The paper utilizes the 4-layer IoT architecture as a reference to identify security issues with corresponding solutions.
+AU  - Williams, Phillip
+AU  - Dutta, Indira Kaylan
+AU  - Daoud, Hisham
+AU  - Bayoumi, Magdy
+DA  - 2022/8//
+DO  - 10.1016/j.iot.2022.100564
+KW  - Blockchain
+KW  - IoT
+KW  - Machine learning
+KW  - Security
+KW  - Security solutions
+KW  - Threats
+PB  - Elsevier B.V.
+PY  - 2022
+TI  - A survey on security in internet of things with a focus on the impact of emerging technologies
+T2  - Internet of Things (Netherlands)
+VL  - 19
+ER  -
+TY  - BOOK
+AU  - Mark NK Saunders
+DA  - 2023/3//
+ET  - 9th
+PB  - Research Methods for Business Students
+PY  - 2023
+TI  - Research Methods for Business Students
+ER  -
