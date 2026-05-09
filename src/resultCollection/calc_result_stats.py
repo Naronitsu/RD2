@@ -73,6 +73,10 @@ def load_runs(csv_path: Path) -> Dict[str, List[float]]:
     off_ms: List[float] = []
     on_rps: List[float] = []
     off_rps: List[float] = []
+    on_cpu_ms: List[float] = []
+    off_cpu_ms: List[float] = []
+    on_heap_delta_bytes: List[float] = []
+    off_heap_delta_bytes: List[float] = []
 
     with csv_path.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
@@ -81,12 +85,24 @@ def load_runs(csv_path: Path) -> Dict[str, List[float]]:
             off_ms.append(float(row["offElapsedMs"]))
             on_rps.append(float(row["onRowsPerSec"]))
             off_rps.append(float(row["offRowsPerSec"]))
+            if "onCpuMs" in row and row["onCpuMs"]:
+                on_cpu_ms.append(float(row["onCpuMs"]))
+            if "offCpuMs" in row and row["offCpuMs"]:
+                off_cpu_ms.append(float(row["offCpuMs"]))
+            if "onHeapDeltaBytes" in row and row["onHeapDeltaBytes"]:
+                on_heap_delta_bytes.append(float(row["onHeapDeltaBytes"]))
+            if "offHeapDeltaBytes" in row and row["offHeapDeltaBytes"]:
+                off_heap_delta_bytes.append(float(row["offHeapDeltaBytes"]))
 
     return {
         "onElapsedMs": on_ms,
         "offElapsedMs": off_ms,
         "onRowsPerSec": on_rps,
         "offRowsPerSec": off_rps,
+        "onCpuMs": on_cpu_ms,
+        "offCpuMs": off_cpu_ms,
+        "onHeapDeltaBytes": on_heap_delta_bytes,
+        "offHeapDeltaBytes": off_heap_delta_bytes,
     }
 
 
@@ -96,6 +112,10 @@ def analyze_mode(mode_name: str, csv_path: Path) -> Dict[str, object]:
     off_ms_stats = describe(runs["offElapsedMs"])
     on_rps_stats = describe(runs["onRowsPerSec"])
     off_rps_stats = describe(runs["offRowsPerSec"])
+    on_cpu_stats = describe(runs["onCpuMs"]) if runs["onCpuMs"] else None
+    off_cpu_stats = describe(runs["offCpuMs"]) if runs["offCpuMs"] else None
+    on_heap_delta_stats = describe(runs["onHeapDeltaBytes"]) if runs["onHeapDeltaBytes"] else None
+    off_heap_delta_stats = describe(runs["offHeapDeltaBytes"]) if runs["offHeapDeltaBytes"] else None
 
     overhead_pct = (
         (on_ms_stats["mean"] - off_ms_stats["mean"]) / off_ms_stats["mean"] * 100.0
@@ -109,10 +129,14 @@ def analyze_mode(mode_name: str, csv_path: Path) -> Dict[str, object]:
         "rvOn": {
             "elapsedMs": on_ms_stats,
             "rowsPerSec": on_rps_stats,
+            "cpuMs": on_cpu_stats,
+            "heapDeltaBytes": on_heap_delta_stats,
         },
         "rvOff": {
             "elapsedMs": off_ms_stats,
             "rowsPerSec": off_rps_stats,
+            "cpuMs": off_cpu_stats,
+            "heapDeltaBytes": off_heap_delta_stats,
         },
         "overheadPct": overhead_pct,
     }
@@ -191,6 +215,12 @@ def main() -> int:
         lines.extend(format_stats_block("rvOff.elapsedMs", section["rvOff"]["elapsedMs"], "ms"))
         lines.extend(format_stats_block("rvOn.rowsPerSec", section["rvOn"]["rowsPerSec"], ""))
         lines.extend(format_stats_block("rvOff.rowsPerSec", section["rvOff"]["rowsPerSec"], ""))
+        if section["rvOn"]["cpuMs"] and section["rvOff"]["cpuMs"]:
+            lines.extend(format_stats_block("rvOn.cpuMs", section["rvOn"]["cpuMs"], "ms"))
+            lines.extend(format_stats_block("rvOff.cpuMs", section["rvOff"]["cpuMs"], "ms"))
+        if section["rvOn"]["heapDeltaBytes"] and section["rvOff"]["heapDeltaBytes"]:
+            lines.extend(format_stats_block("rvOn.heapDeltaBytes", section["rvOn"]["heapDeltaBytes"], "B"))
+            lines.extend(format_stats_block("rvOff.heapDeltaBytes", section["rvOff"]["heapDeltaBytes"], "B"))
         lines.append("")
 
     txt_out.write_text("\n".join(lines), encoding="utf-8")

@@ -41,12 +41,12 @@ This motivates exploring \textbf{how to specify and embed a small, local runtime
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\columnwidth]{../figure-1-research-onion.png}
+  \includegraphics[width=\columnwidth]{figures/figure-1-research-onion.png}
   \caption{The research onion (adapted from Saunders \textit{et al.})~\cite{saunders2016research}.}
   \label{fig:research-onion}
 \end{figure}
 
-This study investigates a minimal, resource-bounded runtime verification mechanism for a safety-critical automotive Electronic Control Unit (ECU) using a simulation-based experimental design. The methodology is structured according to the layers of the Saunders \textit{et al.} research onion~\cite{saunders2016research}.
+This study investigates a minimal, resource-bounded runtime verification mechanism for a safety-critical automotive Electronic Control Unit (ECU) using a simulation-based experimental design. The methodology is organised using the layers of the Saunders \textit{et al.} research onion~\cite{saunders2016research}.
 
 \paragraph{Research Philosophy: Pragmatism.}
 The research is grounded in a \textbf{pragmatist} philosophy, focusing on developing a solution that is practically effective under realistic resource constraints. The value of the work is judged by whether the proposed runtime verification approach can be integrated into an automotive ECU context and meet performance and safety requirements, rather than by commitment to a single ontological or epistemological stance.
@@ -64,9 +64,9 @@ The chosen research strategy is an \textbf{experiment}. A runtime verification c
 The research adopts a \textbf{cross-sectional} time horizon. Data are collected during a finite experimental campaign consisting of multiple simulation runs, each representing a distinct configuration or scenario. The study does not follow the system over an extended real-world operational period; instead, it captures system behaviour at a specific point in time under a range of controlled experimental conditions.
 
 \paragraph{Data Collection and Analysis Procedures.}
-Data collection is performed by instrumenting the simulated ECU environment to record, for each run: cycle-level execution time, CPU load, memory usage attributable to the monitoring component, and whether injected property violations are detected or missed. Faults are injected into the simulated system (for example, by altering parameters or timing) to evaluate the effectiveness of the runtime verification mechanism.
+Data collection is performed by instrumenting the simulated ECU replay service to record, for each run, full-trace elapsed time, process CPU time, heap-delta indicators, throughput, and violation flag totals with RV enabled versus disabled. The replay traces are derived from the Kaggle Car ECU Datalogs dataset~\cite{gxkok21ecudatalogs}. Faults are injected into the abnormal dataset to evaluate whether the monitor reports the expected violation classes.
 
-The collected data are analysed using descriptive statistics (such as means and variances of overhead metrics) and comparative analysis between the monitored and unmonitored configurations. This analysis quantifies the performance impact of the monitoring mechanism and its detection capabilities relative to the derived requirements. The results are then interpreted in light of the research objectives to determine whether the minimal, resource-bounded runtime verification approach is suitable for deployment in safety-critical automotive ECU settings.
+The collected data are analysed using descriptive statistics (mean, standard deviation, and tail percentiles) and direct comparisons between monitored and unmonitored runs. This quantifies both runtime cost and detection behaviour against the study objectives.
 
 \subsection{Background to the Research Theme}
 

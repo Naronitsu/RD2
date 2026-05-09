@@ -5,7 +5,7 @@ This section describes the empirical setup used to evaluate a minimal runtime ve
 
 \subsection{Overall approach}
 
-The methodology proceeds in four stages: (1)~prepare a cleaned ECU dataset with stable schema and timestamps; (2)~construct an abnormal variant by injecting controlled violations into existing rows while preserving file size; (3)~deploy \textbf{LARVA}~\cite{colombo2009larva} in a Spring-based server endpoint that processes each sample and raises monitor states; and (4)~benchmark latency and throughput by replaying the same input under RV enabled versus disabled execution paths.
+The methodology proceeds in four stages: (1)~prepare a cleaned ECU dataset with stable schema and timestamps (sourced from the Kaggle Car ECU Datalogs dataset~\cite{gxkok21ecudatalogs}); (2)~construct an abnormal variant by injecting controlled violations into existing rows while preserving file size; (3)~deploy \textbf{LARVA}~\cite{colombo2009larva} in a Spring-based server endpoint that processes each sample and raises monitor states; and (4)~benchmark latency and throughput by replaying the same input under RV enabled versus disabled execution paths.
 
 Abela \textit{et al.}~\cite{abela2023rvtee} describe a prototype that couples LARVA with ROSMonitoring for robotic systems:
 
@@ -31,7 +31,7 @@ Each flag is evaluated on replayed traces; the abnormal dataset injects approxim
 
 \subsection{Benchmark protocol}
 
-Two benchmark regimes are executed with identical machine and JVM conditions: \textbf{baseline} (clean trace) and \textbf{abnormal} (injected trace). In both regimes, the same endpoint and CSV shape are used, and only RV instrumentation is toggled through a per-request parameter (\texttt{rvEnabled=true/false}) and the global server setting (\texttt{rv.enabled}). Each regime runs warmup iterations followed by ten measured trials per mode. Reported metrics include rows processed, elapsed time, throughput (rows/s), average, standard deviation, p95/p99 latency, and overhead:
+Two benchmark regimes are executed with identical machine and JVM conditions: \textbf{baseline} (clean trace) and \textbf{abnormal} (injected trace). In both regimes, the same endpoint and CSV shape are used, and only RV instrumentation is toggled through a per-request parameter (\texttt{rvEnabled=true/false}) and the global server setting (\texttt{rv.enabled}). Each regime runs warmup iterations followed by ten measured trials per mode. Reported metrics include rows processed, elapsed time, throughput (rows/s), average, standard deviation, p95/p99 latency, and overhead. Each elapsed-time value represents end-to-end processing of the full input trace per request (68{,}433 rows), not per-row latency:
 \[
 \text{overhead}(\%)=\frac{\overline{t}_{\mathrm{RV\ on}}-\overline{t}_{\mathrm{RV\ off}}}{\overline{t}_{\mathrm{RV\ off}}}\times 100.
 \]

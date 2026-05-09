@@ -61,6 +61,11 @@ M.~Saunders, P.~Lewis, and A.~Thornhill, \emph{Research Methods for Business
   Students}, 7th~ed.\hskip 1em plus 0.5em minus 0.4em\relax Harlow: Pearson,
   2016.
 
+\bibitem{gxkok21ecudatalogs}
+{gxkok21}, ``Car ecu datalogs,'' [Online]. Available:
+  \url{https://www.kaggle.com/datasets/gxkok21/car-ecu-datalogs}, 2024,
+  accessed: 2026-05-09.
+
 \bibitem{jaksic2018algebraic}
 S.~Jak{\v{s}}i{\'c}, E.~Bartocci, R.~Grosu, and D.~Ni{\v{c}}kovi{\'c}, ``An
   algebraic framework for runtime verification,'' \emph{arXiv}, 2018.

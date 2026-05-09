@@ -10,6 +10,7 @@ public class _cls_ecu_flags0 implements _callable{
 
 public static PrintWriter pw; 
 public static _cls_ecu_flags0 root;
+private static boolean MONITOR_LOGGING_ENABLED = Boolean.getBoolean("rd2.monitor.logging");
 
 public static LinkedHashMap<_cls_ecu_flags0,_cls_ecu_flags0> _cls_ecu_flags0_instances;
 
@@ -52,6 +53,12 @@ _state_id_ecuSafety = 5;
 
 public static _cls_ecu_flags0 _get_cls_ecu_flags0_inst() { synchronized(_cls_ecu_flags0_instances){
  return root;
+}
+}
+
+private static void monitorLog(String msg) {
+if (MONITOR_LOGGING_ENABLED) {
+System.out.println(msg);
 }
 }
 
@@ -174,35 +181,35 @@ prevMapSource =s .MAPSource ;
 		_goto_ecuSafety(_info);
 		}
 		else if ((_occurredEvent(_event,0/*sampleReceived*/)) && (initialized &&(s .EngineRunningTime <prevRunTime ))){
-		System .out .println ("[LARVA][RD2] TIME_BACKWARDS prev="+prevRunTime +" curr="+s .EngineRunningTime );
+		monitorLog("[LARVA][RD2] TIME_BACKWARDS prev="+prevRunTime +" curr="+s .EngineRunningTime );
 
 		_state_id_ecuSafety = 0;//moving to state timeBackwards
 
 		_goto_ecuSafety(_info);
 		}
 		else if ((_occurredEvent(_event,0/*sampleReceived*/)) && (initialized &&(s .RPM >900.0 )&&((s .BatteryVoltage_V <11.5 )||(s .BatteryVoltage_V >15.5 )))){
-		System .out .println ("[LARVA][RD2] VOLTAGE_OUT_OF_RANGE v="+s .BatteryVoltage_V +" rpm="+s .RPM );
+		monitorLog("[LARVA][RD2] VOLTAGE_OUT_OF_RANGE v="+s .BatteryVoltage_V +" rpm="+s .RPM );
 
 		_state_id_ecuSafety = 1;//moving to state voltageOutOfRange
 
 		_goto_ecuSafety(_info);
 		}
 		else if ((_occurredEvent(_event,0/*sampleReceived*/)) && (initialized &&(s .CoolantTemp_C >110.0 ))){
-		System .out .println ("[LARVA][RD2] COOLANT_TOO_HIGH C="+s .CoolantTemp_C );
+		monitorLog("[LARVA][RD2] COOLANT_TOO_HIGH C="+s .CoolantTemp_C );
 
 		_state_id_ecuSafety = 2;//moving to state coolantTooHigh
 
 		_goto_ecuSafety(_info);
 		}
 		else if ((_occurredEvent(_event,0/*sampleReceived*/)) && (initialized &&((s .EngineRunningTime -prevRunTime )>0.0 )&&((s .EngineRunningTime -prevRunTime )<=0.2 )&&(Math .abs (s .ThrottlePosition -prevThrottle )>25.0 ))){
-		System .out .println ("[LARVA][RD2] THROTTLE_SPIKE dThrottle="+Math .abs (s .ThrottlePosition -prevThrottle )+" dt="+(s .EngineRunningTime -prevRunTime ));
+		monitorLog("[LARVA][RD2] THROTTLE_SPIKE dThrottle="+Math .abs (s .ThrottlePosition -prevThrottle )+" dt="+(s .EngineRunningTime -prevRunTime ));
 
 		_state_id_ecuSafety = 3;//moving to state throttleSpike
 
 		_goto_ecuSafety(_info);
 		}
 		else if ((_occurredEvent(_event,0/*sampleReceived*/)) && (initialized &&(Math .abs (s .Load -s .MAPSource )>60.0 ))){
-		System .out .println ("[LARVA][RD2] LOAD_MAP_MISMATCH load="+s .Load +" map="+s .MAPSource );
+		monitorLog("[LARVA][RD2] LOAD_MAP_MISMATCH load="+s .Load +" map="+s .MAPSource );
 
 		_state_id_ecuSafety = 4;//moving to state loadMapMismatch
 
@@ -237,17 +244,17 @@ prevMapSource =s .MAPSource ;
 public void _goto_ecuSafety(String _info){
  String state_format = _string_ecuSafety(_state_id_ecuSafety, 1);
  if (state_format.startsWith("!!!SYSTEM REACHED BAD STATE!!!")) {
-   System.out.println("[ecuSafety]MOVED ON METHODCALL: "+ _info +" TO STATE::> " + state_format);
+   monitorLog("[ecuSafety]MOVED ON METHODCALL: "+ _info +" TO STATE::> " + state_format);
 }
 }
 
 public String _string_ecuSafety(int _state_id, int _mode){
 switch(_state_id){
-case 4: if (_mode == 0) return "loadMapMismatch"; else return "!!!SYSTEM REACHED BAD STATE!!! loadMapMismatch "+new _BadStateExceptionecu_flags().toString()+" ";
-case 0: if (_mode == 0) return "timeBackwards"; else return "!!!SYSTEM REACHED BAD STATE!!! timeBackwards "+new _BadStateExceptionecu_flags().toString()+" ";
-case 2: if (_mode == 0) return "coolantTooHigh"; else return "!!!SYSTEM REACHED BAD STATE!!! coolantTooHigh "+new _BadStateExceptionecu_flags().toString()+" ";
-case 3: if (_mode == 0) return "throttleSpike"; else return "!!!SYSTEM REACHED BAD STATE!!! throttleSpike "+new _BadStateExceptionecu_flags().toString()+" ";
-case 1: if (_mode == 0) return "voltageOutOfRange"; else return "!!!SYSTEM REACHED BAD STATE!!! voltageOutOfRange "+new _BadStateExceptionecu_flags().toString()+" ";
+case 4: if (_mode == 0) return "loadMapMismatch"; else return "!!!SYSTEM REACHED BAD STATE!!! loadMapMismatch ";
+case 0: if (_mode == 0) return "timeBackwards"; else return "!!!SYSTEM REACHED BAD STATE!!! timeBackwards ";
+case 2: if (_mode == 0) return "coolantTooHigh"; else return "!!!SYSTEM REACHED BAD STATE!!! coolantTooHigh ";
+case 3: if (_mode == 0) return "throttleSpike"; else return "!!!SYSTEM REACHED BAD STATE!!! throttleSpike ";
+case 1: if (_mode == 0) return "voltageOutOfRange"; else return "!!!SYSTEM REACHED BAD STATE!!! voltageOutOfRange ";
 case 5: if (_mode == 0) return "ok"; else return "ok";
 default: return "!!!SYSTEM REACHED AN UNKNOWN STATE!!!";
 }

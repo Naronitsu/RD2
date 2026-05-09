@@ -1,0 +1,51 @@
+﻿{
+    "createdAt":  "2026-05-09T10:55:26.3381607+02:00",
+    "label":  "baseline",
+    "serverUrl":  "http://localhost:18113",
+    "csvPath":  "C:\\Users\\brama\\Documents\\RD2\\dataset\\20180713-home2mimos_clean.csv",
+    "warmupRuns":  1,
+    "measuredRuns":  5,
+    "rvOn":  {
+                 "mode":  "rv_on",
+                 "runs":  5,
+                 "rowsProcessed":  68433,
+                 "avgElapsedMs":  120.2,
+                 "stddevElapsedMs":  14.822280526288793,
+                 "avgRowsPerSec":  575895.45083561563,
+                 "stddevRowsPerSec":  66719.995581721058,
+                 "avgCpuMs":  125,
+                 "stddevCpuMs":  22.097086912079611,
+                 "avgHeapDeltaBytes":  11494352,
+                 "stddevHeapDeltaBytes":  293134.65984083153,
+                 "p95ElapsedMs":  139.4,
+                 "p99ElapsedMs":  141.48,
+                 "flagsTotal":  {
+                                    "coolantTooHigh":  0,
+                                    "voltageOutOfRange":  0,
+                                    "throttleSpike":  0,
+                                    "loadMapMismatch":  25
+                                }
+             },
+    "rvOff":  {
+                  "mode":  "rv_off",
+                  "runs":  5,
+                  "rowsProcessed":  68433,
+                  "avgElapsedMs":  112.6,
+                  "stddevElapsedMs":  14.976648490233053,
+                  "avgRowsPerSec":  615239.198321304,
+                  "stddevRowsPerSec":  70446.930503565032,
+                  "avgCpuMs":  118.75,
+                  "stddevCpuMs":  13.975424859373685,
+                  "avgHeapDeltaBytes":  7927675.2,
+                  "stddevHeapDeltaBytes":  685529.62793098879,
+                  "p95ElapsedMs":  133,
+                  "p99ElapsedMs":  137.8,
+                  "flagsTotal":  {
+                                     "coolantTooHigh":  0,
+                                     "voltageOutOfRange":  0,
+                                     "throttleSpike":  0,
+                                     "loadMapMismatch":  0
+                                 }
+              },
+    "overheadPct":  6.749555950266438
+}
