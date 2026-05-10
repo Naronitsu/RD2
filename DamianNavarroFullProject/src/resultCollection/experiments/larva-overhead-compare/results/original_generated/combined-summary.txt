@@ -1,0 +1,26 @@
+﻿Combined benchmark summary
+createdAt=2026-05-09T10:54:29.7163192+02:00
+serverUrl=http://localhost:18111
+normalCsv=C:\Users\brama\Documents\RD2\dataset\20180713-home2mimos_clean.csv
+abnormalCsv=C:\Users\brama\Documents\RD2\dataset\20180713-home2mimos_clean_abnormal.csv
+warmupRuns=1
+measuredRuns=5
+
+[baseline]
+rowsProcessed=68433
+avgOnMs=125.8 avgOffMs=118.2 overheadPct=6.4297800338409425
+avgOnCpuMs=128.125 avgOffCpuMs=121.875
+avgOnHeapDeltaMB=7.55617980957031 avgOffHeapDeltaMB=3.50977783203125
+stdOnMs=11.189280584559492 stdOffMs=17.355114519933309
+avgOnRowsPerSec=547374.9270253526 avgOffRowsPerSec=587489.32108081877
+stdOnRowsPerSec=47727.405445258904 stdOffRowsPerSec=72679.245081517918
+
+[abnormal]
+rowsProcessed=68433
+avgOnMs=4824.4 avgOffMs=119.8 overheadPct=3927.0450751252083
+avgOnCpuMs=3562.5 avgOffCpuMs=125
+avgOnHeapDeltaMB=-30.5909896850586 avgOffHeapDeltaMB=1.84561309814453
+stdOnMs=199.47631438343751 stdOffMs=13.845576911057192
+avgOnRowsPerSec=14204.404626073538 avgOffRowsPerSec=577078.34760662087
+stdOnRowsPerSec=593.92924783558 stdOffRowsPerSec=63349.680547255055
+rvOnFlagsTotal={"coolantTooHigh":17105,"voltageOutOfRange":17100,"throttleSpike":17110,"loadMapMismatch":17115}

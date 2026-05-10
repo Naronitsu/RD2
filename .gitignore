@@ -1,9 +1,2 @@
-# Runtime benchmark outputs and logs
-src/resultCollection/runs/
-*.log
-
-# Maven/Java build artifacts
-src/SpringServer/target/
-
-# Large media (host externally or use Git LFS)
+# Root-only artefacts (large / local-only)
 VideoDemo.mp4

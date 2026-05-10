@@ -1,0 +1,14 @@
+Injected violations summary
+input=C:\Users\brama\Documents\RD2\dataset\20180713-home2mimos_clean.csv
+output=C:\Users\brama\Documents\RD2\dataset\20180713-home2mimos_clean_abnormal.csv
+seed=1337
+target_fraction=0.2
+min_gap_rows=3
+rows_total=68433
+violations_injected_total=13686
+
+By flag:
+- voltageOutOfRange: 3421
+- coolantTooHigh: 3421
+- throttleSpike: 3422
+- loadMapMismatch: 3422
