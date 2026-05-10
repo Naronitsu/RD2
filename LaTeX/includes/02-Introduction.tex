@@ -3,16 +3,6 @@
 
 This section presents the research design for the project \emph{Minimal, Resource-Bounded Runtime Verification for a Safety-Critical Automotive ECU}. It follows the structure of the Research Design II write-up, covering the theme and rationale, research positioning, background, hypothesis, and the overall aim and purpose of the study.
 
-\subsection{Title and Programme Details}
-
-\textbf{Module:} MCAST IICT -- Research Design II (2025/2026)
-
-\textbf{Student:} Damian Navarro
-
-\textbf{Programme:} BSc (Hons) Software Development
-
-\textbf{Institute:} Institute of Information and Communication Technology (IICT), MCAST
-
 \subsection{Chosen Research}
 
 The working title of the research is:
@@ -48,25 +38,7 @@ This motivates exploring \textbf{how to specify and embed a small, local runtime
 
 This study investigates a minimal, resource-bounded runtime verification mechanism for a safety-critical automotive Electronic Control Unit (ECU) using a simulation-based experimental design. The methodology is organised using the layers of the Saunders \textit{et al.} research onion~\cite{saunders2016research}.
 
-\paragraph{Research Philosophy: Pragmatism.}
-The research is grounded in a \textbf{pragmatist} philosophy, focusing on developing a solution that is practically effective under realistic resource constraints. The value of the work is judged by whether the proposed runtime verification approach can be integrated into an automotive ECU context and meet performance and safety requirements, rather than by commitment to a single ontological or epistemological stance.
-
-\paragraph{Research Approach: Deductive.}
-A \textbf{deductive} approach is adopted. Existing theory and prior work on runtime verification, safety-critical systems, and real-time resource constraints are used to derive expectations about the behaviour of a minimal monitoring mechanism (e.g., that it should incur low overhead while reliably detecting property violations). These theoretically informed expectations are then tested empirically through controlled experiments in a simulated ECU environment.
-
-\paragraph{Methodological Choice: Quantitative Mono Method.}
-The study employs a \textbf{quantitative mono-method} design. All primary data are numerical, capturing performance and correctness characteristics of the monitored system. Key variables include execution time overhead, CPU utilisation, memory footprint, and the rate of correctly detected versus missed property violations. These quantitative measures form the basis for assessing whether the proposed mechanism satisfies the targeted resource bounds and safety criteria.
-
-\paragraph{Research Strategy: Experiment.}
-The chosen research strategy is an \textbf{experiment}. A runtime verification component is implemented and integrated with a simulated model of a safety-critical automotive ECU. Experimental runs are conducted under controlled conditions, where input workloads, operating scenarios, and injected faults are systematically varied. A baseline configuration without monitoring is used for comparison, enabling the isolation of the effects of the runtime verification mechanism on system performance and fault detection.
-
-\paragraph{Time Horizon: Cross-Sectional.}
-The research adopts a \textbf{cross-sectional} time horizon. Data are collected during a finite experimental campaign consisting of multiple simulation runs, each representing a distinct configuration or scenario. The study does not follow the system over an extended real-world operational period; instead, it captures system behaviour at a specific point in time under a range of controlled experimental conditions.
-
-\paragraph{Data Collection and Analysis Procedures.}
-Data collection is performed by instrumenting the simulated ECU replay service to record, for each run, full-trace elapsed time, process CPU time, heap-delta indicators, throughput, and violation flag totals with RV enabled versus disabled. The replay traces are derived from the Kaggle Car ECU Datalogs dataset~\cite{gxkok21ecudatalogs}. Faults are injected into the abnormal dataset to evaluate whether the monitor reports the expected violation classes.
-
-The collected data are analysed using descriptive statistics (mean, standard deviation, and tail percentiles) and direct comparisons between monitored and unmonitored runs. This quantifies both runtime cost and detection behaviour against the study objectives.
+The study follows a \textbf{pragmatist, deductive, quantitative mono-method} design under an experimental strategy and cross-sectional horizon. Existing RV and automotive V\&V literature informs expectations, which are tested through controlled replay experiments. The \textbf{independent variable} is monitoring condition (RV enabled vs.\ disabled); \textbf{dependent variables} are elapsed time, throughput, CPU time, heap-delta indicators, and violation flag totals. Data are collected from full-trace requests using a Kaggle-derived ECU dataset~\cite{gxkok21ecudatalogs}, then analysed with descriptive statistics (mean, standard deviation, p95/p99) and direct ON/OFF comparisons.
 
 \subsection{Background to the Research Theme}
 

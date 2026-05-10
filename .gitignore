@@ -4,3 +4,6 @@ src/resultCollection/runs/
 
 # Maven/Java build artifacts
 src/SpringServer/target/
+
+# Large media (host externally or use Git LFS)
+VideoDemo.mp4

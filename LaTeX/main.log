@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.22)  9 MAY 2026 11:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.22)  10 MAY 2026 09:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -467,70 +467,82 @@ Package hyperref Info: Link coloring OFF on input line 11.
 File: figures/figure-1-research-onion.png Graphic file (type png)
 <use figures/figure-1-research-onion.png>
 Package pdftex.def Info: figures/figure-1-research-onion.png  used on input lin
-e 44.
+e 34.
 (pdftex.def)             Requested size: 252.0pt x 187.54388pt.
  [1{C:/Users/brama/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/b
 rama/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
-] [2 <./figures/figure-1-research-onion.png>]
-Underfull \hbox (badness 1383) in paragraph at lines 105--106
+]
+Underfull \hbox (badness 1383) in paragraph at lines 77--78
 []\OT1/ptm/b/n/10 Aim: \OT1/ptm/m/n/10 To de-sign and an-a-lyt-i-cally eval-u-a
 te a min-i-mal,
  []
 
 
-Underfull \hbox (badness 3229) in paragraph at lines 110--111
+Underfull \hbox (badness 3229) in paragraph at lines 82--83
 []\OT1/ptm/m/n/10 To pro-pose an in-te-gra-tion strat-egy that min-imises
  []
 
-) (includes/03-Literature.tex (includes/literature-map.tex
-<figures/LiteratureMap.png, id=198, 1561.835pt x 1696.3375pt>
+) (includes/03-Literature.tex [2 <./figures/figure-1-research-onion.png>]
+(includes/literature-map.tex
+<figures/LiteratureMap.png, id=194, 1561.835pt x 1696.3375pt>
 File: figures/LiteratureMap.png Graphic file (type png)
 <use figures/LiteratureMap.png>
 Package pdftex.def Info: figures/LiteratureMap.png  used on input line 4.
-(pdftex.def)             Requested size: 516.0pt x 560.44022pt.
+(pdftex.def)             Requested size: 252.0pt x 273.69734pt.
+
+Underfull \hbox (badness 1400) in paragraph at lines 5--5
+\OT1/ptm/m/n/8 Fig. 2.  []Literature map cov-er-ing the full re-search bib-li-o
+g-ra-phy (sur-
+ []
+
 )
-Underfull \hbox (badness 2653) in paragraph at lines 16--17
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+[]\OT1/ptm/m/n/10 Related work clus-ters into five strands: (i)
+ []
+
+
+Underfull \hbox (badness 7344) in paragraph at lines 12--13
+\OT1/ptm/m/n/10 [[]6[]]; (ii) au-to-mo-tive cy-ber-se-cu-rity V&V prac-tice [[]
+1[]];
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 12--13
+\OT1/ptm/m/n/10 (iii) run-time mon-i-tor-ing for-malisms and context-aware
+ []
+
+
+Underfull \hbox (badness 2653) in paragraph at lines 16--18
 \OT1/ptm/m/n/10 (e.g. [[]1[]], [[]2[]], [[]4[]]--[[]6[]]), archival con-fer-enc
 e pro-ceed-ings
  []
 
-[3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4 <./figures/LiteratureMap.png>]) (includes/04-Methodology.tex [5]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
-4.
+) (includes/04-Methodology.tex [3 <./figures/LiteratureMap.png>]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+7.
 
 (C:\Users\brama\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 2538) in paragraph at lines 34--35
+Underfull \hbox (badness 2538) in paragraph at lines 27--28
 \OT1/ptm/m/n/10 chine and JVM con-di-tions: \OT1/ptm/b/n/10 base-line \OT1/ptm/
 m/n/10 (clean trace) and
  []
 
 
-Underfull \hbox (badness 3009) in paragraph at lines 34--35
+Underfull \hbox (badness 3009) in paragraph at lines 27--28
 \OT1/ptm/b/n/10 ab-nor-mal \OT1/ptm/m/n/10 (in-jected trace). In both regimes, 
 the same
  []
 
 
-Underfull \hbox (badness 2478) in paragraph at lines 34--35
+Underfull \hbox (badness 2478) in paragraph at lines 27--28
 \OT1/ptm/m/n/10 end-point and CSV shape are used, and only RV in-
  []
 
 ) (includes/05-Findings.tex
-Underfull \hbox (badness 1546) in paragraph at lines 4--5
-\OT1/ptm/m/n/10 server-side ECU trace re-play with LARVA in-stru-men-ta-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 10--11
 []\OT1/ptm/b/n/10 Baseline regime: \OT1/ptm/m/n/10 clean trace
  []
@@ -546,28 +558,35 @@ Overfull \hbox (2.7572pt too wide) in paragraph at lines 11--12
 /m/n/10 )
  []
 
-
-Overfull \hbox (23.0941pt too wide) in paragraph at lines 21--29
- [][] 
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+[]\OT1/ptm/b/n/10 RQ1 (de-tec-tion of in-jected ab-nor-mal-i-ties).
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
-[]\OT1/ptm/b/n/10 RQ1 (de-tec-tion of in-jected ab-nor-mal-i-
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+\OT1/ptm/m/n/10 The ab-nor-mal regime pro-duced sub-stan-tial RV
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
-\OT1/ptm/b/n/10 ties). \OT1/ptm/m/n/10 The ab-nor-mal regime pro-duced high RV
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
 \OT1/ptm/m/n/10 ON flag to-tals (\OT1/pcr/m/n/10 coolantTooHigh\OT1/ptm/m/n/10 
-=34210,
+=17105,
  []
 
-[6]) (includes/06-Conclusion.tex
+
+Underfull \hbox (badness 1715) in paragraph at lines 38--39
+\OT1/pcr/m/n/10 loadMapMismatch\OT1/ptm/m/n/10 =17115; 68,430 events in ag-gre-
+gate
+ []
+
+
+Underfull \hbox (badness 2941) in paragraph at lines 42--43
+[]\OT1/ptm/b/n/10 RQ3 (sta-bil-ity and thresh-old sen-si-tiv-ity). \OT1/ptm/m/n
+/10 Base-line
+ []
+
+) (includes/06-Conclusion.tex
 Underfull \hbox (badness 3492) in paragraph at lines 4--5
 []\OT1/ptm/m/n/10 This study eval-u-ated a min-i-mal run-time ver-i-fi-ca-tion
  []
@@ -589,17 +608,12 @@ n/10 coolantTooHigh\OT1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 1824) in paragraph at lines 4--5
+Underfull \hbox (badness 2608) in paragraph at lines 4--5
 \OT1/pcr/m/n/10 throttleSpike\OT1/ptm/m/n/10 , \OT1/pcr/m/n/10 loadMapMismatch\
-OT1/ptm/m/n/10 ). The em-pir-i-cal
+OT1/ptm/m/n/10 ). The ob-jec-tive
  []
 
-)
-Underfull \hbox (badness 6542) in paragraph at lines 10--36
-[]\OT1/ptm/m/n/10 Future work should fo-cus on four di-rec-tions. (1)
- []
-
-(main.bbl [7])
+[5]) (main.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -611,7 +625,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8
+[6
 
 ] (main.aux)
  ***********
@@ -619,31 +633,30 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 693F9033C4EC05E8DDBC06843C0BF21B;5054.
+(rerunfilecheck)             Checksum: A7BEA2178D5A4851E72EF211AF733BFC;5023.
  ) 
 Here is how much of TeX's memory you used:
- 11022 strings out of 474486
- 178187 string characters out of 5743754
- 1949542 words of memory out of 5000000
- 33082 multiletter control sequences out of 15000+600000
- 597937 words of font info for 103 fonts, out of 8000000 for 9000
+ 11011 strings out of 474486
+ 178044 string characters out of 5743754
+ 1950542 words of memory out of 5000000
+ 33081 multiletter control sequences out of 15000+600000
+ 596830 words of font info for 102 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 75i,10n,79p,1828b,637s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,1389b,492s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/brama/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/brama/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmr10.pfb><C:/Users/brama/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmr7.pfb><C:/Users/brama/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/brama/AppData/Local/Programs/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/brama/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/brama/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/brama/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/brama/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/brama/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/brama/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (8 pages, 621919 bytes).
+ms/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/brama/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/brama/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/brama/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/brama/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (6 pages, 604791 bytes).
 PDF statistics:
- 410 PDF objects out of 1000 (max. 8388607)
- 70 named destinations out of 1000 (max. 500000)
+ 381 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
  227 words of extra memory for PDF output out of 10000 (max. 10000000)
 

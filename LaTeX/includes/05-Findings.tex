@@ -1,7 +1,7 @@
 \section{Findings \& Discussion of Results}
 \label{sec:Fin}
 
-This section reports the experimental outcomes of the server-side ECU trace replay with LARVA instrumentation toggled on/off. Results are drawn from the benchmark session with tuned \texttt{loadMapMismatch} threshold (\texttt{|Load-MAPSource| > 60}), using 3 warmup runs and 10 measured runs per mode on the same machine and JVM conditions. The experiment assumes telemetry is transmitted from an IoT/ECU endpoint to a server-side verification API.
+This section reports the experimental outcomes of the server-side ECU trace replay with LARVA instrumentation toggled on/off. Table~\ref{tab:rv-overhead} uses the stock LARVA-generated monitor (no logging/stacktrace optimisations), with 1 warmup run and 5 measured runs per mode on the same machine and JVM conditions---matching the \emph{Original} variant summarised in Table~\ref{tab:rv-overhead-variants}. Additional discussion below references supplementary benchmark sessions with a tuned \texttt{loadMapMismatch} threshold (\texttt{|Load-MAPSource| > 60}), 3 warmup runs, and 10 measured runs per mode. The experiment assumes telemetry is transmitted from an IoT/ECU endpoint to a server-side verification API.
 
 \subsection{Result presentation}
 
@@ -16,63 +16,51 @@ All elapsed-time values reported in this section correspond to full-trace proces
 
 \begin{table}[ht]
     \centering
-    \caption{Runtime verification overhead summary (10 measured runs per mode)}
+    \caption{Runtime verification overhead summary (unmodified generated monitor; 5 measured runs per mode)}
     \label{tab:rv-overhead}
+    \scriptsize
+    \resizebox{\columnwidth}{!}{%
     \begin{tabular}{l|c|c}
     \textbf{Metric} & \textbf{Baseline} & \textbf{Abnormal} \\ \hline
-    RV ON elapsed (ms) & 115.3 $\pm$ 6.04 & 819.3 $\pm$ 19.29 \\
-    RV OFF elapsed (ms) & 111.5 $\pm$ 20.03 & 103.4 $\pm$ 1.71 \\
-    RV ON throughput (rows/s) & 594{,}937.4 $\pm$ 30{,}089.0 & 83{,}567.3 $\pm$ 1{,}940.6 \\
-    RV OFF throughput (rows/s) & 626{,}961.4 $\pm$ 82{,}253.9 & 661{,}990.5 $\pm$ 10{,}913.9 \\
-    Overhead (\%) & 3.41 & 692.36 \\
+    RV ON elapsed (ms) & 125.8 $\pm$ 11.19 & 4824.4 $\pm$ 199.48 \\
+    RV OFF elapsed (ms) & 118.2 $\pm$ 17.36 & 119.8 $\pm$ 13.85 \\
+    RV ON throughput (rows/s) & 547{,}374.9 $\pm$ 47{,}727.4 & 14{,}204.4 $\pm$ 593.9 \\
+    RV OFF throughput (rows/s) & 587{,}489.3 $\pm$ 72{,}679.2 & 577{,}078.3 $\pm$ 63{,}349.7 \\
+    RV ON CPU (ms) & 128.1 $\pm$ 13.07 & 3562.5 $\pm$ 189.44 \\
+    RV OFF CPU (ms) & 121.9 $\pm$ 27.95 & 125.0 $\pm$ 22.10 \\
+    Overhead (\%) & 6.43 & 3927.05 \\
     \end{tabular}
+    }
 \end{table}
-
-Tail latency also reflects this split behaviour. For baseline, RV ON p95/p99 are 124.40/127.28 ms, while RV OFF p95/p99 are 145.75/161.95 ms. For abnormal traces, RV ON p95/p99 are 850.80/856.56 ms, whereas RV OFF remains at 106.00/106.00 ms.
 
 \subsection{Analysis and interpretation}
 
-\textbf{RQ1 (detection of injected abnormalities).} The abnormal regime produced high RV ON flag totals (\texttt{coolantTooHigh}=34210, \texttt{voltageOutOfRange}=34200, \texttt{throttleSpike}=34220, \texttt{loadMapMismatch}=34230), while RV OFF flags remained zero. This indicates that violation reporting is coupled to monitor execution as intended and that injected abnormal classes are detected consistently.
+\textbf{RQ1 (detection of injected abnormalities).} The abnormal regime produced substantial RV ON flag totals (\texttt{coolantTooHigh}=17105, \texttt{voltageOutOfRange}=17100, \texttt{throttleSpike}=17110, \texttt{loadMapMismatch}=17115; 68{,}430 events in aggregate across the four flags), while RV OFF flags remained zero. This indicates that violation reporting is coupled to monitor execution as intended and that injected abnormal classes are detected consistently.
 
-\textbf{RQ2 (monitoring overhead).} Baseline overhead is low (3.41\%), suggesting that monitor integration is feasible for non-adversarial trace processing on the tested server path. Abnormal overhead remains substantial (692.36\%), showing that violation-heavy execution paths still dominate runtime even after reducing logging overhead. In other words, monitor cost is not constant; it is strongly state-dependent. These overhead values should be interpreted as server-side verification cost under a telemetry-upload architecture.
+\textbf{RQ2 (monitoring overhead).} On the unmodified generated monitor, baseline overhead is moderate (6.43\%), while abnormal overhead is extremely large (3927.05\%), showing that violation-heavy execution paths dominate runtime when stock diagnostics (logging and stacktrace-backed state strings) are enabled. In other words, monitor cost is not constant; it is strongly state-dependent. These overhead values should be interpreted as server-side verification cost under a telemetry-upload architecture; Table~\ref{tab:rv-overhead-variants} shows how far overhead falls once those diagnostics are targeted.
 
-\textbf{RQ3 (stability and threshold sensitivity).} Standard deviations are small relative to means in most cases, indicating repeatable behaviour. After tuning \texttt{loadMapMismatch} from 30 to 60, baseline false positives reduced (aggregate baseline \texttt{loadMapMismatch} decreased compared with pre-tuning runs), while abnormal detection remained strong. This supports threshold calibration as a practical control for false-positive pressure.
+\textbf{RQ3 (stability and threshold sensitivity).} Baseline runs show standard deviations that are modest relative to means; abnormal RV-on timings exhibit wider spread, consistent with allocation-heavy diagnostic paths. After tuning \texttt{loadMapMismatch} from 30 to 60, baseline false positives reduced (aggregate baseline \texttt{loadMapMismatch} decreased compared with pre-tuning runs), while abnormal detection remained strong. This supports threshold calibration as a practical control for false-positive pressure.
 
 \subsection{Controlled root-cause experiment}
 
-To isolate the source of abnormal-path overhead, an additional controlled comparison was executed on three monitor variants under identical benchmark settings (1 warmup, 5 measured runs): (i) original generated monitor, (ii) logging disabled, and (iii) logging disabled plus removal of bad-state stacktrace/string construction. Timing results are summarised in Table~\ref{tab:rv-overhead-variants}, and resource metrics are summarised in Table~\ref{tab:rv-resource-variants}.
+To isolate the source of abnormal-path overhead, an additional controlled comparison was executed on three monitor variants under identical benchmark settings (1 warmup, 5 measured runs): (i) original generated monitor, (ii) logging disabled, and (iii) logging disabled plus removal of bad-state stacktrace/string construction.
 
 \begin{table}[ht]
     \centering
     \caption{Abnormal-path overhead across monitor variants (controlled 3-way comparison)}
     \label{tab:rv-overhead-variants}
     \scriptsize
-    \begin{tabular}{l|c|c|c}
-    \textbf{Variant} & \textbf{Base O/H (\%)} & \textbf{Abn O/H (\%)} & \textbf{Abn RV ON (ms)} \\ \hline
-    Original & 6.43 & 3927.05 & 4824.4 \\
-    Logging disabled & 14.61 & 683.79 & 851.2 \\
-    No stacktrace & 6.75 & 9.39 & 125.8 \\
-    \end{tabular}
-\end{table}
-
-This progression shows that the dominant abnormal overhead originates from generated diagnostic behaviour in bad-state handling (especially stacktrace-backed state-string construction), not from the core guard checks themselves.
-
-\begin{table}[ht]
-    \centering
-    \caption{Resource metrics across monitor variants (controlled 3-way comparison, abnormal runs)}
-    \label{tab:rv-resource-variants}
-    \scriptsize
     \resizebox{\columnwidth}{!}{%
     \begin{tabular}{l|c|c|c|c}
-    \textbf{Variant} & \textbf{On CPU} & \textbf{Off CPU} & \textbf{On Heap $\Delta$} & \textbf{Off Heap $\Delta$} \\ \hline
-    Original & 3562.5 & 125.0 & -30.59 & 1.85 \\
-    Logging disabled & 850.0 & 100.0 & -10.62 & 12.19 \\
-    No stacktrace & 125.0 & 112.5 & 13.97 & -26.13 \\
-    \end{tabular}%
+    \textbf{Variant} & \textbf{Base O/H (\%)} & \textbf{Abn O/H (\%)} & \textbf{Abn RV ON (ms)} & \textbf{Abn RV ON CPU (ms)} \\ \hline
+    Original & 6.43 & 3927.05 & 4824.4 & 3562.5 \\
+    Logging disabled & 14.61 & 683.79 & 851.2 & 850.0 \\
+    No stacktrace & 6.75 & 9.39 & 125.8 & 125.0 \\
+    \end{tabular}
     }
 \end{table}
 
-CPU time follows the same trend as elapsed time, confirming that compute spent inside monitor-side diagnostics is the dominant contributor in abnormal paths. Heap delta is less stable across variants because Java GC activity during full-trace requests can produce negative or positive net deltas; therefore, heap delta is interpreted as a coarse indicator, while CPU and elapsed-time comparisons provide the primary evidence.
+This progression shows that the dominant abnormal overhead originates from generated diagnostic behaviour in bad-state handling (especially stacktrace-backed state-string construction), not from core guard checks. CPU measurements followed the same trend as elapsed time, while heap-delta remained noisy due to garbage collection effects.
 
 \subsection{Comparison with related work and quality considerations}
 
@@ -80,6 +68,6 @@ The observed trade-off aligns with prior RV literature: runtime monitoring provi
 
 \textbf{Validity.} Internal validity is strengthened by same-endpoint comparisons, warmup before measured runs, and on/off toggling as the only intended treatment factor. Construct validity is supported by explicit metrics (elapsed time, throughput, p95/p99, overhead) and deterministic replay inputs.
 
-\textbf{Reliability.} Repeated 10-run measurements with reported standard deviations indicate reproducibility under stable local conditions.
+\textbf{Reliability.} Repeated measurements with reported standard deviations (5-run batches for Table~\ref{tab:rv-overhead}; 10-run batches where noted above) indicate reproducibility under stable local conditions.
 
 \textbf{Generalizability.} External validity remains limited to this server-side replay implementation and selected property set. Results should not be extrapolated directly to production ECUs without hardware-in-the-loop or in-vehicle evaluation.
