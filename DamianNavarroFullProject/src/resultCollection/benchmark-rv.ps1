@@ -23,7 +23,8 @@ function Percentile {
     [double]$P
   )
   if ($Values.Count -eq 0) { return [double]::NaN }
-  $sorted = $Values | Sort-Object
+  # @(...) ensures an array so .Count exists under StrictMode (single-element Sort-Object returns a scalar)
+  $sorted = @($Values | Sort-Object)
   if ($sorted.Count -eq 1) { return [double]$sorted[0] }
 
   $rank = ($P / 100.0) * ($sorted.Count - 1)
