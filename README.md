@@ -13,3 +13,6 @@ https://drive.google.com/file/d/1BcJMKaucKGygJZNofPdzZOUfcgnjcb5n/view?usp=drive
 
 ## Live Prototype Demo:
 https://drive.google.com/file/d/14woxcr2BVSZ9-HxxurWqdr8GjIporP7e/view?usp=drive_link
+
+## Presentation:
+https://docs.google.com/presentation/d/1N8lF3BWe7-6NltWLN95o8r6dHJ5wFN3wv-hMahpclRk/edit?usp=sharing
