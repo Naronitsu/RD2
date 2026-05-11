@@ -9,8 +9,7 @@ This project investigates a minimal runtime verification (RV) pipeline for safet
 Results show that naive generated monitoring can introduce substantial overhead in abnormal paths, primarily due to expensive logging and bad-state stacktrace construction in hot paths rather than core predicate evaluation. After optimization (logging control and removal of bad-state stacktrace string construction), overhead is reduced to low double-digit percentages while preserving violation detection behavior. The findings support the feasibility of lightweight, monitor-based assurance for server-side automotive telemetry analysis, and highlight practical implementation details that strongly influence runtime cost in applied RV deployments.
 
 ## Video Explanation:
-https://drive.google.com/file/d/-1BcJMKaucKGygJZNofPdzZOUfcgnjcb5n/view?usp=drive_link
+https://drive.google.com/file/d/1BcJMKaucKGygJZNofPdzZOUfcgnjcb5n/view?usp=drive_link
 
 ## Live Prototype Demo:
-https://drive.google.com/file/d/12woxcr2BVSZ9-HxxurWqdr8GjIporP7e/view?usp=sharing
-
+https://drive.google.com/file/d/14woxcr2BVSZ9-HxxurWqdr8GjIporP7e/view?usp=drive_link
